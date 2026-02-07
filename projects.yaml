@@ -1,0 +1,346 @@
+# Portfolio Projects Configuration
+# Used to generate a static portfolio site
+
+site:
+  title: "Teague Sterling's Open Source Projects"
+  description: "A collection of DuckDB extensions, developer tools, and research projects"
+  github_username: teaguesterling
+
+# Badge configuration templates
+badges:
+  build:
+    template: "https://github.com/{repo}/actions/workflows/{workflow}/badge.svg"
+    link_template: "https://github.com/{repo}/actions"
+    default_workflow: "MainDistributionPipeline.yml"
+  docs:
+    template: "https://img.shields.io/badge/docs-available-blue"
+  issues:
+    template: "https://img.shields.io/github/issues/{repo}"
+    link_template: "https://github.com/{repo}/issues"
+  license:
+    template: "https://img.shields.io/github/license/{repo}"
+
+# Project categories
+categories:
+  duckdb_extensions:
+    title: "DuckDB Extensions"
+    description: "Extensions for DuckDB, the fast in-process analytical database"
+    icon: "database"
+
+    subcategories:
+      document_processing:
+        title: "Document Processing"
+        description: "Extensions for parsing, transforming, and analyzing documents"
+        projects:
+          - id: duckdb_webbed
+            name: "webbed"
+            repo: teaguesterling/duckdb_webbed
+            description: "Comprehensive XML and HTML processing with XPath extraction, schema inference, and format conversion"
+            features:
+              - "XML/HTML parsing with XPath"
+              - "Smart schema inference"
+              - "HTML table extraction"
+              - "XML to JSON conversion"
+            badges: [build, docs, issues]
+            docs_url: "https://duckdb-webbed.readthedocs.io"
+
+          - id: duckdb_markdown
+            name: "duckdb_markdown"
+            repo: teaguesterling/duckdb_markdown
+            description: "Comprehensive Markdown processing with file reading, content extraction, and block-level parsing"
+            features:
+              - "Read and parse Markdown files"
+              - "Extract frontmatter, code blocks, links, and headings"
+              - "Block-level AST access"
+            badges: [build, docs, issues]
+            docs_url: "https://github.com/teaguesterling/duckdb_markdown#readme"
+
+          - id: duckdb_yaml
+            name: "duckdb_yaml"
+            repo: teaguesterling/duckdb_yaml
+            description: "YAML file reading with native type support and multi-document handling"
+            features:
+              - "Read YAML files as structured data"
+              - "Multi-document stream support"
+              - "Type coercion and validation"
+            badges: [build, issues]
+
+          - id: duckdb_duck_block_utils
+            name: "duck_block_utils"
+            repo: teaguesterling/duckdb_duck_block_utils
+            description: "Format-agnostic document block utilities with unified duck_block type and Pandoc AST conversion"
+            features:
+              - "Unified block representation"
+              - "Block builders and transformers"
+              - "Pandoc AST interoperability"
+            badges: [build, issues]
+
+      code_analysis:
+        title: "Code & Development"
+        description: "Extensions for analyzing code, parsing queries, and developer workflows"
+        projects:
+          - id: sitting_duck
+            name: "sitting_duck"
+            repo: teaguesterling/sitting_duck
+            description: "AST analysis using Tree-sitter for 27 programming languages with semantic type extraction"
+            features:
+              - "Parse source code to AST"
+              - "27 language support"
+              - "Pattern matching and queries"
+              - "Semantic type extraction"
+            badges: [build, issues]
+
+          - id: duck_hunt
+            name: "duck_hunt"
+            repo: teaguesterling/duck_hunt
+            description: "Log parsing extension for 90+ development tools and CI/CD systems"
+            features:
+              - "Parse logs from 90+ tools"
+              - "Format auto-detection"
+              - "CI/CD workflow parsing"
+              - "Context extraction"
+            badges: [build, issues]
+
+          - id: duck_tails
+            name: "duck_tails"
+            repo: teaguesterling/duck_tails
+            description: "Git-aware data analysis with version control integration and repository queries"
+            features:
+              - "git:// protocol support"
+              - "Git LFS integration"
+              - "Diff analysis"
+              - "Repository metadata queries"
+            badges: [build, issues]
+
+      data_formats:
+        title: "Data & Formats"
+        description: "Extensions for specialized data formats and protocols"
+        projects:
+          - id: duckdb_urlpattern
+            name: "duckdb_urlpattern"
+            repo: teaguesterling/duckdb_urlpattern
+            description: "WHATWG URLPattern API implementation for URL matching and component extraction"
+            features:
+              - "URLPattern matching"
+              - "URL component extraction"
+              - "WHATWG standard compliant"
+            badges: [build, issues]
+
+          - id: duckdb_scalarfs
+            name: "duckdb_scalarfs"
+            repo: teaguesterling/duckdb_scalarfs
+            description: "Scalar filesystem for in-memory content including variables, inline literals, and data URIs"
+            features:
+              - "In-memory file content"
+              - "Data URI support"
+              - "Variable storage"
+            badges: [build, issues]
+
+      ai_integration:
+        title: "AI & Integration"
+        description: "Extensions for AI agent integration and dynamic function handling"
+        projects:
+          - id: duckdb_mcp
+            name: "duckdb_mcp"
+            repo: teaguesterling/duckdb_mcp
+            description: "Model Context Protocol server/client integration for AI agent connectivity"
+            features:
+              - "MCP server implementation"
+              - "HTTP transport"
+              - "Custom tool definitions"
+              - "Multiple output formats"
+            badges: [build, issues]
+
+          - id: duckdb_func_apply
+            name: "duckdb_func_apply"
+            repo: teaguesterling/duckdb_func_apply
+            description: "Dynamic function application allowing runtime invocation of functions by name"
+            features:
+              - "Runtime function dispatch"
+              - "Dynamic invocation"
+              - "Metaprogramming support"
+            badges: [build, issues]
+
+      science:
+        title: "Science & Research"
+        description: "Extensions for scientific computing and research applications"
+        projects:
+          - id: geneducks
+            name: "geneducks"
+            repo: teaguesterling/geneducks
+            description: "Genetic data analysis extension for bioinformatics workflows"
+            features:
+              - "Genetic data parsing"
+              - "Sequence analysis"
+            badges: [build, issues]
+            status: development
+
+  # Extensions I've contributed to but didn't author
+  duckdb_contributions:
+    title: "DuckDB Contributions"
+    description: "Extensions I've contributed to or maintain forks of"
+    icon: "git-merge"
+
+    projects:
+      - id: duckdb_extension_parser_tools
+        name: "parser_tools"
+        repo: teaguesterling/duckdb_extension_parser_tools
+        description: "SQL parsing extension exposing DuckDB's native parser for query analysis"
+        features:
+          - "Extract tables, functions, columns from SQL"
+          - "Query structure analysis"
+          - "DuckDB-native parsing"
+        badges: [build, issues]
+        role: contributor
+
+      - id: duckdb_iceberg
+        name: "duckdb_iceberg"
+        repo: teaguesterling/duckdb_iceberg
+        upstream: duckdb/duckdb_iceberg
+        description: "Apache Iceberg table format support for DuckDB"
+        features:
+          - "Read Iceberg tables"
+          - "Time travel queries"
+          - "Partition pruning"
+        badges: [build, issues]
+        role: contributor
+        note: "Originally developed by RelationalAI"
+
+      - id: duckdb_rdkit
+        name: "duckdb_rdkit"
+        repo: teaguesterling/duckdb_rdkit
+        upstream: bodowd/duckdb_rdkit
+        description: "RDKit cheminformatics integration for molecular data analysis"
+        features:
+          - "Molecular structure handling"
+          - "Chemical property calculations"
+          - "Substructure search"
+        badges: [build, issues]
+        role: contributor
+        note: "Original author: bodowd"
+
+  tools:
+    title: "Developer Tools"
+    description: "Command-line tools and utilities"
+    icon: "terminal"
+
+    projects:
+      - id: lq
+        name: "lq (blq)"
+        repo: teaguesterling/blq-cli
+        description: "CLI tool for build log query and analysis using DuckDB with MCP server support"
+        features:
+          - "Query build logs with SQL"
+          - "340+ unit tests"
+          - "MCP server integration"
+          - "Multiple output formats"
+        badges: [build, issues]
+
+      - id: magic
+        name: "magic"
+        repo: teaguesterling/magic
+        description: "Shell command history capture and intelligent querying system"
+        features:
+          - "Command history capture"
+          - "Intelligent search"
+          - "Context-aware suggestions"
+        badges: [issues]
+
+      - id: tmux_use
+        name: "tmux-use"
+        repo: teaguesterling/tmux-use
+        description: "Smart tmux session management with automatic naming by context (git projects, directories)"
+        features:
+          - "Automatic session naming"
+          - "Smart prompt integration"
+          - "Tab completion"
+          - "Pattern-based session management"
+        badges: [issues]
+
+      - id: auto_terminal_extension
+        name: "auto-terminal-extension"
+        repo: teaguesterling/auto-terminal-extension
+        description: "VSCode extension for terminal-focused workflows with auto-creation and window management"
+        features:
+          - "Auto-create terminal in editor area"
+          - "Auto-close window on terminal exit"
+          - "Configurable behavior"
+        badges: [issues]
+
+      - id: dotfiles
+        name: ".dotfiles"
+        repo: teaguesterling/.dotfiles
+        description: "Cross-system development configuration optimized for tmux + vim workflow"
+        features:
+          - "Session-specific bash history per tmux session"
+          - "Terminator-style tmux keybindings"
+          - "Seamless vim/tmux navigation"
+          - "System clipboard integration"
+        badges: [issues]
+
+  experimental:
+    title: "Experimental"
+    description: "Work-in-progress projects"
+    icon: "flask"
+
+    projects:
+      - id: git_messe_af
+        name: "git-messe-af"
+        repo: teaguesterling/git-messe-af
+        description: "MESS Exchange - Meatspace Execution and Submission System"
+        badges: [issues]
+        status: experimental
+
+  academic:
+    title: "Academic & Research"
+    description: "Scientific software and databases from my research career"
+    icon: "microscope"
+
+    projects:
+      - id: zinc
+        name: "ZINC Database"
+        url: "https://zinc.docking.org"
+        description: "Free database of commercially-available compounds for virtual screening, serving millions of molecules to researchers worldwide"
+        features:
+          - "Lead architect and developer (ZINC 15)"
+          - "270+ million purchasable compounds"
+          - "Substructure and similarity search"
+          - "RESTful API and bulk download"
+        role: lead
+        institution: "UCSF"
+        note: "One of the most widely used resources in computational drug discovery"
+
+      - id: dock
+        name: "UCSF DOCK"
+        url: "http://dock.compbio.ucsf.edu"
+        description: "Molecular docking program for structure-based drug design and virtual screening"
+        features:
+          - "Build system and portability"
+          - "Testing infrastructure"
+          - "Cross-platform compilation"
+        role: contributor
+        institution: "UCSF"
+
+      - id: feature
+        name: "FEATURE"
+        url: "https://simtk.org/projects/feature"
+        description: "System for analyzing protein structures using statistical descriptions of microenvironments around functional sites"
+        features:
+          - "Software engineering"
+          - "3D functional site prediction"
+          - "Machine learning on protein structure"
+        role: contributor
+        institution: "Stanford"
+
+# Display settings
+display:
+  show_status_badges: true
+  show_feature_lists: true
+  max_features_shown: 4
+  group_by_subcategory: true
+
+# Theme configuration
+theme:
+  primary_color: "#2d5a27"  # DuckDB green-ish
+  accent_color: "#ffc107"
+  dark_mode: true

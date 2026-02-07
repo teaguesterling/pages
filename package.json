@@ -1,0 +1,15 @@
+{
+  "name": "teague-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Portfolio site for Teague Sterling's open source projects",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve --watch",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "js-yaml": "^4.1.0"
+  }
+}

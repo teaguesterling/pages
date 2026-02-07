@@ -1,0 +1,70 @@
+<article class="project-card{% if project.status %} project-card--{{ project.status }}{% endif %}{% if project.role %} project-card--{{ project.role }}{% endif %}">
+  <header class="project-header">
+    <h3 class="project-name">
+      {% if project.repo %}
+      <a href="https://github.com/{{ project.repo }}">{{ project.name }}</a>
+      {% elif project.url %}
+      <a href="{{ project.url }}">{{ project.name }}</a>
+      {% else %}
+      {{ project.name }}
+      {% endif %}
+    </h3>
+    {% if project.institution %}
+    <span class="project-institution">{{ project.institution }}</span>
+    {% endif %}
+    {% if project.status %}
+    <span class="project-status project-status--{{ project.status }}">{{ project.status }}</span>
+    {% endif %}
+    {% if project.role %}
+    <span class="project-role project-role--{{ project.role }}">{{ project.role }}</span>
+    {% endif %}
+  </header>
+
+  <p class="project-description">{{ project.description }}</p>
+
+  {% if project.features %}
+  <ul class="project-features">
+    {% for feature in project.features %}
+    <li>{{ feature }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if project.note %}
+  <p class="project-note">{{ project.note }}</p>
+  {% endif %}
+
+  {% if project.badges %}
+  <div class="project-badges">
+    {% for badge in project.badges %}
+      {% if badge == 'build' %}
+      <a href="{{ project.repo | badgeLink('build', badges) }}" class="badge">
+        <img src="{{ project.repo | badgeUrl('build', badges) }}" alt="Build Status" loading="lazy">
+      </a>
+      {% elif badge == 'docs' %}
+      <a href="{{ project.docs_url or ('https://github.com/' + project.repo + '#readme') }}" class="badge">
+        <img src="https://img.shields.io/badge/docs-available-blue" alt="Documentation" loading="lazy">
+      </a>
+      {% elif badge == 'issues' %}
+      <a href="{{ project.repo | badgeLink('issues', badges) }}" class="badge">
+        <img src="{{ project.repo | badgeUrl('issues', badges) }}" alt="Open Issues" loading="lazy">
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="project-links">
+    {% if project.repo %}
+    <a href="https://github.com/{{ project.repo }}" class="project-link project-link--github">View on GitHub</a>
+    {% elif project.url %}
+    <a href="{{ project.url }}" class="project-link project-link--website">Visit Website</a>
+    {% endif %}
+    {% if project.docs_url %}
+    <a href="{{ project.docs_url }}" class="project-link project-link--docs">Documentation</a>
+    {% endif %}
+    {% if project.upstream %}
+    <a href="https://github.com/{{ project.upstream }}" class="project-link project-link--upstream">Upstream</a>
+    {% endif %}
+  </div>
+</article>

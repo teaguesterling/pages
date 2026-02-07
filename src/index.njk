@@ -1,0 +1,86 @@
+---
+layout: base.njk
+---
+
+{% set badges = projects.badges %}
+
+{# DuckDB Extensions - Authored #}
+{% set category = projects.categories.duckdb_extensions %}
+<section class="category" id="duckdb-extensions">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  {% for subKey, subcategory in category.subcategories %}
+  <div class="subcategory" id="{{ subKey }}">
+    <h3 class="subcategory-title">{{ subcategory.title }}</h3>
+    <p class="subcategory-description">{{ subcategory.description }}</p>
+    <div class="projects-grid">
+      {% for project in subcategory.projects %}
+        {% include "project-card.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{# DuckDB Contributions #}
+{% set category = projects.categories.duckdb_contributions %}
+<section class="category category--contributions" id="duckdb-contributions">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-grid">
+    {% for project in category.projects %}
+      {% include "project-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+{# Developer Tools #}
+{% set category = projects.categories.tools %}
+<section class="category" id="tools">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-grid">
+    {% for project in category.projects %}
+      {% include "project-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+{# Academic & Research #}
+{% set category = projects.categories.academic %}
+<section class="category category--academic" id="academic">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-grid">
+    {% for project in category.projects %}
+      {% include "project-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+{# Experimental #}
+{% set category = projects.categories.experimental %}
+<section class="category category--experimental" id="experimental">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-grid">
+    {% for project in category.projects %}
+      {% include "project-card.njk" %}
+    {% endfor %}
+  </div>
+</section>

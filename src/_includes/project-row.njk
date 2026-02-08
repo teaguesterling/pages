@@ -1,0 +1,75 @@
+<div class="project-row{% if project.status %} project-row--{{ project.status }}{% endif %}{% if project.role %} project-row--{{ project.role }}{% endif %}">
+  <div class="project-summary" onclick="this.parentElement.classList.toggle('expanded')">
+    <div class="project-name-cell">
+      <span class="expand-icon"></span>
+      <span class="project-name">{{ project.name }}</span>
+      {% if project.institution %}
+      <span class="project-institution">{{ project.institution }}</span>
+      {% endif %}
+      {% if project.role %}
+      <span class="project-role project-role--{{ project.role }}">{{ project.role }}</span>
+      {% endif %}
+      {% if project.status %}
+      <span class="project-status project-status--{{ project.status }}">{{ project.status }}</span>
+      {% endif %}
+    </div>
+    <div class="project-brief">{{ project.description | truncate(100) }}</div>
+    <div class="project-badges-cell">
+      {% if project.badges %}
+        {% for badge in project.badges %}
+          {% if badge == 'build' %}
+          <img src="{{ project.repo | badgeUrl('build', badges) }}" alt="Build" loading="lazy">
+          {% elif badge == 'issues' %}
+          <img src="{{ project.repo | badgeUrl('issues', badges) }}" alt="Issues" loading="lazy">
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="project-details">
+    <div class="project-details-inner">
+      <p class="project-description">{{ project.description }}</p>
+
+      {% if project.features %}
+      <div class="project-features-section">
+        <h4>Features</h4>
+        <ul class="project-features">
+          {% for feature in project.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if project.note %}
+      <p class="project-note">{{ project.note }}</p>
+      {% endif %}
+
+      <div class="project-links">
+        {% if project.repo %}
+        <a href="https://github.com/{{ project.repo }}" class="project-link project-link--github">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        {% elif project.url %}
+        <a href="{{ project.url }}" class="project-link project-link--website">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          Website
+        </a>
+        {% endif %}
+        {% if project.docs_url %}
+        <a href="{{ project.docs_url }}" class="project-link project-link--docs">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Docs
+        </a>
+        {% endif %}
+        {% if project.upstream %}
+        <a href="https://github.com/{{ project.upstream }}" class="project-link project-link--upstream">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5.41 21L12 14.42 18.59 21 20 19.59l-8-8-8 8L5.41 21zM12 4L4 12l1.41 1.41L12 6.83l6.59 6.58L20 12 12 4z"/></svg>
+          Upstream
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

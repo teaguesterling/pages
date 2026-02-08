@@ -15,10 +15,14 @@ layout: base.njk
   {% for subKey, subcategory in category.subcategories %}
   <div class="subcategory" id="{{ subKey }}">
     <h3 class="subcategory-title">{{ subcategory.title }}</h3>
-    <p class="subcategory-description">{{ subcategory.description }}</p>
-    <div class="projects-grid">
+    <div class="projects-table">
+      <div class="projects-table-header">
+        <div class="col-name">Project</div>
+        <div class="col-description">Description</div>
+        <div class="col-badges">Status</div>
+      </div>
       {% for project in subcategory.projects %}
-        {% include "project-card.njk" %}
+        {% include "project-row.njk" %}
       {% endfor %}
     </div>
   </div>
@@ -33,9 +37,14 @@ layout: base.njk
     <p>{{ category.description }}</p>
   </header>
 
-  <div class="projects-grid">
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
     {% for project in category.projects %}
-      {% include "project-card.njk" %}
+      {% include "project-row.njk" %}
     {% endfor %}
   </div>
 </section>
@@ -48,9 +57,14 @@ layout: base.njk
     <p>{{ category.description }}</p>
   </header>
 
-  <div class="projects-grid">
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
     {% for project in category.projects %}
-      {% include "project-card.njk" %}
+      {% include "project-row.njk" %}
     {% endfor %}
   </div>
 </section>
@@ -63,9 +77,14 @@ layout: base.njk
     <p>{{ category.description }}</p>
   </header>
 
-  <div class="projects-grid">
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
     {% for project in category.projects %}
-      {% include "project-card.njk" %}
+      {% include "project-row.njk" %}
     {% endfor %}
   </div>
 </section>
@@ -78,9 +97,14 @@ layout: base.njk
     <p>{{ category.description }}</p>
   </header>
 
-  <div class="projects-grid">
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
     {% for project in category.projects %}
-      {% include "project-card.njk" %}
+      {% include "project-row.njk" %}
     {% endfor %}
   </div>
 </section>

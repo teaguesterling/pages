@@ -9,6 +9,7 @@ export default function (eleventyConfig) {
   // Copy static assets
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy({ "static": "static" });
 
   // Helper to generate badge URL
   eleventyConfig.addFilter("badgeUrl", function (repo, type, badges) {

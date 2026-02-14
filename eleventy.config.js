@@ -34,6 +34,7 @@ export default function (eleventyConfig) {
   });
 
   return {
+    pathPrefix: "/pages/",
     dir: {
       input: "src",
       output: "_site",

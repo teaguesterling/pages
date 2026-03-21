@@ -309,6 +309,29 @@ main {
   border-radius: 3px;
 }
 
+/* Stat badges (stars, downloads) */
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.stat-badge--stars {
+  background: rgba(210, 153, 34, 0.12);
+  color: var(--color-warning);
+}
+
+.stat-badge--downloads {
+  background: rgba(35, 134, 54, 0.12);
+  color: var(--color-accent);
+}
+
 /* Project Details (accordion content) */
 .project-details {
   display: grid;

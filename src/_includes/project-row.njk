@@ -15,6 +15,20 @@
     </div>
     <div class="project-brief">{{ project.description | truncate(100) }}</div>
     <div class="project-badges-cell">
+      {% set starCount = project.repo | stars %}
+      {% set dlCount = project.repo | downloads %}
+      {% if dlCount %}
+      <span class="stat-badge stat-badge--downloads" title="Downloads/week (DuckDB community extensions)">
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14ZM7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"/></svg>
+        {{ dlCount | compactNumber }}/wk
+      </span>
+      {% endif %}
+      {% if starCount %}
+      <span class="stat-badge stat-badge--stars" title="GitHub stars">
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>
+        {{ starCount }}
+      </span>
+      {% endif %}
       {% if project.badges %}
         {% for badge in project.badges %}
           {% if badge == 'build' %}

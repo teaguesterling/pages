@@ -33,6 +33,27 @@ export default function (eleventyConfig) {
     return Object.values(subcategories).flatMap((sub) => sub.projects || []);
   });
 
+  // Look up stars for a repo
+  eleventyConfig.addFilter("stars", function (repo) {
+    const stats = this.ctx?.stats;
+    if (!stats?.stars) return null;
+    return stats.stars[repo] ?? null;
+  });
+
+  // Look up weekly downloads for a repo
+  eleventyConfig.addFilter("downloads", function (repo) {
+    const stats = this.ctx?.stats;
+    if (!stats?.downloads_weekly) return null;
+    return stats.downloads_weekly[repo] ?? null;
+  });
+
+  // Format numbers with K suffix
+  eleventyConfig.addFilter("compactNumber", function (num) {
+    if (num == null) return "";
+    if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+    return num.toString();
+  });
+
   return {
     pathPrefix: "/pages/",
     dir: {

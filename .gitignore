@@ -4,9 +4,10 @@ _site/
 *.log
 .DS_Store
 
-# Issues data
+# Generated data
 issues.json
 issues.db
+projects-flat.yaml
 
 # blq
 .lq/*

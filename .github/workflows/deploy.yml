@@ -27,6 +27,11 @@ jobs:
 
       - run: npm ci
 
+      - name: Fetch latest stats
+        run: bash update-stats.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

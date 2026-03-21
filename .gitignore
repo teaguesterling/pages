@@ -3,3 +3,13 @@ _site/
 .cache/
 *.log
 .DS_Store
+
+# Issues data
+issues.json
+issues.db
+
+# blq
+.lq/*
+!.lq/hooks/
+!.lq/config.toml
+!.lq/commands.toml

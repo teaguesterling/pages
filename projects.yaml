@@ -75,6 +75,15 @@ categories:
               - "Pandoc AST interoperability"
             badges: [build, issues]
 
+          - id: duckdb_read_lines
+            name: "duckdb_read_lines"
+            repo: teaguesterling/duckdb_read_lines
+            description: "Simple parsers for fast extraction from line-based files"
+            features:
+              - "Line-based file parsing"
+              - "Fast extraction patterns"
+            badges: [build, issues]
+
       code_analysis:
         title: "Code & Development"
         description: "Extensions for analyzing code, parsing queries, and developer workflows"
@@ -161,6 +170,17 @@ categories:
               - "Metaprogramming support"
             badges: [build, issues]
 
+          - id: fledgling
+            name: "fledgling"
+            repo: teaguesterling/fledgling
+            description: "MCP tools that help AI agents get their bearings in a codebase — unified SQL views over code, git, docs, and conversations, powered by DuckDB"
+            features:
+              - "Unified SQL views over code"
+              - "Git history analysis"
+              - "Documentation indexing"
+              - "Conversation context"
+            badges: [build, issues]
+
       science:
         title: "Science & Research"
         description: "Extensions for scientific computing and research applications"
@@ -174,6 +194,15 @@ categories:
               - "Sequence analysis"
             badges: [build, issues]
             status: development
+
+          - id: plinking_duck
+            name: "plinking_duck"
+            repo: teaguesterling/plinking_duck
+            description: "DuckDB tools for Plink2 genetic data analysis"
+            features:
+              - "Plink2 file format support"
+              - "Genetic data analysis"
+            badges: [build, issues]
 
   # Extensions I've contributed to but didn't author
   duckdb_contributions:
@@ -278,6 +307,27 @@ categories:
           - "System clipboard integration"
         badges: [issues]
 
+      - id: jetsam
+        name: "jetsam"
+        repo: teaguesterling/jetsam
+        description: "Git workflow accelerator for humans and agents — wraps multi-step git workflows into single, plannable commands with MCP integration"
+        features:
+          - "Single-command workflows (save, ship, sync, release)"
+          - "Plan-then-execute safety model"
+          - "MCP server for AI agent integration"
+          - "Git worktree support"
+        badges: [build, issues]
+        docs_url: "https://jetsam-mcp.readthedocs.io"
+
+      - id: git_wt
+        name: "git-wt"
+        repo: teaguesterling/git-wt
+        description: "Shortcuts for working with git worktrees"
+        features:
+          - "Git worktree management"
+          - "Shell shortcuts"
+        badges: [issues]
+
   experimental:
     title: "Experimental"
     description: "Work-in-progress projects"
@@ -290,6 +340,7 @@ categories:
         description: "MESS Exchange - Meatspace Execution and Submission System"
         badges: [issues]
         status: experimental
+
 
   academic:
     title: "Academic & Research"

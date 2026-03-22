@@ -12,12 +12,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "static": "static" });
 
   // Helper to generate badge URL
-  eleventyConfig.addFilter("badgeUrl", function (repo, type, badges) {
+  eleventyConfig.addFilter("badgeUrl", function (repo, type, badges, workflow) {
     const config = badges[type];
     if (!config) return "";
     return config.template
       .replace("{repo}", repo)
-      .replace("{workflow}", config.default_workflow || "");
+      .replace("{workflow}", workflow || config.default_workflow || "");
   });
 
   // Helper to generate badge link

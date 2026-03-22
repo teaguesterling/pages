@@ -179,7 +179,7 @@ categories:
               - "Git history analysis"
               - "Documentation indexing"
               - "Conversation context"
-            badges: [build, issues]
+            badges: [issues]
 
       science:
         title: "Science & Research"
@@ -214,12 +214,13 @@ categories:
       - id: duckdb_extension_parser_tools
         name: "parser_tools"
         repo: teaguesterling/duckdb_extension_parser_tools
+        upstream: duckdb/duckdb_extension_parser_tools
         description: "SQL parsing extension exposing DuckDB's native parser for query analysis"
         features:
           - "Extract tables, functions, columns from SQL"
           - "Query structure analysis"
           - "DuckDB-native parsing"
-        badges: [build, issues]
+        badges: [issues]
         role: contributor
 
       - id: duckdb_iceberg
@@ -264,6 +265,7 @@ categories:
           - "MCP server integration"
           - "Multiple output formats"
         badges: [build, issues]
+        build_workflow: "ci.yml"
 
       - id: magic
         name: "magic"
@@ -317,6 +319,7 @@ categories:
           - "MCP server for AI agent integration"
           - "Git worktree support"
         badges: [build, issues]
+        build_workflow: "ci.yml"
         docs_url: "https://jetsam-mcp.readthedocs.io"
 
       - id: git_wt

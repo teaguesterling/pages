@@ -309,6 +309,19 @@ categories:
           - "System clipboard integration"
         badges: [issues]
 
+      - id: ghud
+        name: "ghud"
+        repo: teaguesterling/ghud
+        description: "GitHub Heads-Up Display — terminal dashboard for portfolio repos showing notifications, PRs, issues, and recent activity"
+        features:
+          - "Important notifications (review requests, mentions)"
+          - "Open and recently merged PR tracking"
+          - "Issues from others on your repos"
+          - "Discover repos missing from portfolio"
+        badges: [build, issues]
+        build_workflow: "ci.yml"
+        docs_url: "https://ghud.readthedocs.io"
+
       - id: jetsam
         name: "jetsam"
         repo: teaguesterling/jetsam

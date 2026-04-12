@@ -255,8 +255,8 @@ categories:
     icon: "terminal"
 
     projects:
-      - id: lq
-        name: "lq (blq)"
+      - id: blq
+        name: "blq"
         repo: teaguesterling/blq-cli
         description: "CLI tool for build log query and analysis using DuckDB with MCP server support"
         features:
@@ -342,6 +342,107 @@ categories:
         features:
           - "Git worktree management"
           - "Shell shortcuts"
+        badges: [issues]
+
+      - id: ffs
+        name: "ffs"
+        repo: teaguesterling/ffs
+        description: "Crash recovery for Claude Code — recovers session context after crashes or reboots"
+        features:
+          - "Session recovery after crashes"
+          - "TUI display of active sessions"
+          - "Shows uncommitted changes and active plans"
+          - "Git state and tmux history recovery"
+        badges: [issues]
+
+      - id: squackit
+        name: "squackit"
+        repo: teaguesterling/squackit
+        description: "Semi-QUalified Agent Wingman Kit — stateful intelligence and MCP server layer for fledgling-equipped agents"
+        features:
+          - "Stateful agent intelligence"
+          - "MCP server layer"
+          - "Fledgling integration"
+          - "Cross-session context"
+        badges: [issues]
+
+      - id: pluckit
+        name: "pluckit"
+        repo: teaguesterling/pluckit
+        description: "jQuery for your source code — query and manipulate code using familiar selector patterns"
+        features:
+          - "Source code querying with selectors"
+          - "Code manipulation"
+          - "Multi-language support"
+        badges: [issues]
+
+  agent_suite:
+    title: "Agent Infrastructure"
+    description: "Tools for AI agent safety, control, sandboxing, and intelligence"
+    icon: "shield"
+
+    projects:
+      - id: agent_riggs
+        name: "agent-riggs"
+        repo: teaguesterling/agent-riggs
+        description: "Cross-session memory and analysis layer for AI agents with trust scoring and failure analysis"
+        features:
+          - "Trust scoring system (3-window EWMA)"
+          - "Cross-session failure analysis"
+          - "Ratchet candidate identification"
+          - "Session briefings"
+        badges: [issues]
+
+      - id: kibitzer
+        name: "kibitzer"
+        repo: teaguesterling/kibitzer
+        description: "Claude Code extension that watches tool usage and suggests better alternatives"
+        features:
+          - "Path protection per mode"
+          - "Bash command interception with structured alternatives"
+          - "Mode-based file access control"
+          - "MCP server integration"
+        badges: [issues]
+
+      - id: umwelt
+        name: "umwelt"
+        repo: teaguesterling/umwelt
+        description: "Define what an AI agent can see, edit, call, and trigger using CSS-like syntax"
+        features:
+          - "Unified policy language for agent permissions"
+          - "Cascade-based conflict resolution"
+          - "Enforcement compilers for multiple sandbox tools"
+          - "Resource limits, file and tool control"
+        badges: [issues]
+
+      - id: nsjail_python
+        name: "nsjail-python"
+        repo: teaguesterling/nsjail-python
+        description: "Python wrappers and workflows for nsjail sandboxing"
+        features:
+          - "Python bindings for nsjail"
+          - "Sandbox configuration"
+          - "Workflow integration"
+        badges: [issues]
+
+      - id: claude_plugins
+        name: "claude-plugins"
+        repo: teaguesterling/claude-plugins
+        description: "Developer workflow plugins for Claude Code"
+        features:
+          - "Reusable skill definitions"
+          - "Plugin discovery and installation"
+        badges: [issues]
+
+      - id: lackpy
+        name: "lackpy"
+        repo: teaguesterling/lackpy
+        description: "Micro-inferencer translating natural language intent into sandboxed tool-composition programs"
+        features:
+          - "Intent-to-program translation"
+          - "Local 1.5B model inference (Ollama)"
+          - "AST whitelist validation"
+          - "MCP integration"
         badges: [issues]
 
   experimental:

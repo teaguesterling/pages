@@ -425,6 +425,17 @@ categories:
           - "Workflow integration"
         badges: [issues]
 
+      - id: retritis
+        name: "retritis"
+        repo: teaguesterling/retritis
+        description: "The suite that ties it all together — plugin marketplace, architecture docs, and clinical examples for the full agent toolchain"
+        features:
+          - "Plugin marketplace for Claude Code"
+          - "Two shared substrates: DuckDB (facts) + SQLite (policy)"
+          - "Clinical examples showing tool composition"
+          - "Architecture documentation and diagrams"
+        badges: [issues]
+
       - id: claude_plugins
         name: "claude-plugins"
         repo: teaguesterling/claude-plugins

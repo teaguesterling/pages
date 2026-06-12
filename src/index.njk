@@ -69,6 +69,66 @@ layout: base.njk
   </div>
 </section>
 
+{# Agent Infrastructure #}
+{% set category = projects.categories.agent_suite %}
+<section class="category" id="agent-suite">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
+    {% for project in category.projects %}
+      {% include "project-row.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+{# COSMIC Desktop #}
+{% set category = projects.categories.cosmic_desktop %}
+<section class="category" id="cosmic-desktop">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
+    {% for project in category.projects %}
+      {% include "project-row.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+{# Cockpit Plugins #}
+{% set category = projects.categories.cockpit %}
+<section class="category" id="cockpit">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Project</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
+    {% for project in category.projects %}
+      {% include "project-row.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
 {# Academic & Research #}
 {% set category = projects.categories.academic %}
 <section class="category category--academic" id="academic">

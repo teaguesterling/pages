@@ -145,6 +145,15 @@ categories:
               - "Variable storage"
             badges: [build, issues]
 
+          - id: duckdb_zim
+            name: "duckdb_zim"
+            repo: teaguesterling/duckdb_zim
+            description: "DuckDB extension for reading ZIM files — the offline web-archive format used by Kiwix/Wikipedia"
+            features:
+              - "Read ZIM archive files"
+              - "Query offline web content as tables"
+            badges: [build, issues]
+
       ai_integration:
         title: "AI & Integration"
         description: "Extensions for AI agent integration and dynamic function handling"
@@ -181,6 +190,16 @@ categories:
               - "Conversation context"
             badges: [issues]
 
+          - id: ducklog
+            name: "ducklog"
+            repo: teaguesterling/ducklog
+            description: "Policy as a database — compiles umwelt agent-permission views into queryable DuckDB schemas"
+            features:
+              - "Compile umwelt policy to DuckDB"
+              - "Query agent permissions with SQL"
+              - "Policy-as-data introspection"
+            badges: [issues]
+
       science:
         title: "Science & Research"
         description: "Extensions for scientific computing and research applications"
@@ -203,6 +222,15 @@ categories:
               - "Plink2 file format support"
               - "Genetic data analysis"
             badges: [build, issues]
+
+          - id: duckhts
+            name: "duckhts"
+            repo: teaguesterling/duckhts
+            description: "htslib-based DuckDB extension for high-throughput sequencing file formats (SAM/BAM/VCF, …)"
+            features:
+              - "Read HTS/genomics formats via htslib"
+              - "Query sequencing data as tables"
+            badges: [issues]
 
   # Extensions I've contributed to but didn't author
   duckdb_contributions:
@@ -451,9 +479,84 @@ categories:
         description: "Micro-inferencer translating natural language intent into sandboxed tool-composition programs"
         features:
           - "Intent-to-program translation"
-          - "Local 1.5B model inference (Ollama)"
+          - "Local + cloud model inference via woollama"
           - "AST whitelist validation"
           - "MCP integration"
+        badges: [issues]
+
+      - id: woollama
+        name: "woollama"
+        repo: teaguesterling/woollama
+        description: "MCP + OpenAI-compatible router between AI clients and inference/tool backends — model routing by namespace, recipe orchestration, and conversation-handle routing"
+        features:
+          - "OpenAI /v1 + MCP surfaces over one daemon"
+          - "Routes <provider>/<model> to Ollama, Anthropic, OpenAI, …"
+          - "woollama/<recipe> bound prompt + tools + agentic loop"
+          - "Embeddable woollama.core library"
+        badges: [issues]
+
+  cosmic_desktop:
+    title: "COSMIC Desktop"
+    description: "Tools and AI integrations for the COSMIC desktop environment"
+    icon: "monitor"
+
+    projects:
+      - id: cosmic_fabric
+        name: "cosmic-fabric"
+        repo: teaguesterling/cosmic-fabric
+        description: "Run fabric AI patterns on your selection from the COSMIC desktop — launcher, panel, and workspace frontends over a single local fabric deployment"
+        features:
+          - "COSMIC launcher + panel + workspace surfaces"
+          - "Single supervised fabric daemon"
+          - "Streaming results with tool-loop support"
+          - "Delegates inference to the woollama router"
+        badges: [issues]
+
+      - id: cosmic_goo
+        name: "cosmic-goo"
+        repo: teaguesterling/cosmic-goo
+        description: "Grammar of Operations — a compositional noun→verb→object sentence layer over the COSMIC launcher (Rust engine + goo CLI)"
+        features:
+          - "Compositional command grammar for COSMIC"
+          - "28+ plugins, ~90 verbs, subject addressing"
+          - "Negotiation/coercion + polymorphic verbs"
+          - "`--explain` planner debugger"
+        badges: [issues]
+
+  cockpit:
+    title: "Cockpit Plugins"
+    description: "Minimal Cockpit web-console panels for homelab services — read-only status, no build step"
+    icon: "server"
+
+    projects:
+      - id: cockpit_ollama
+        name: "cockpit-ollama"
+        repo: teaguesterling/cockpit-ollama
+        description: "Cockpit plugin showing Ollama service status, live-polled loaded/installed models, and recent log lines"
+        features:
+          - "Live service + model status"
+          - "Installed vs loaded models"
+          - "Recent log lines"
+        badges: [issues]
+
+      - id: cockpit_borgmatic
+        name: "cockpit-borgmatic"
+        repo: teaguesterling/cockpit-borgmatic
+        description: "Cockpit plugin showing borgmatic backup status, schedule, repositories, archives, and recent logs (read-only)"
+        features:
+          - "Backup status + schedule"
+          - "Repositories and archives"
+          - "Recent log lines"
+        badges: [issues]
+
+      - id: cockpit_nvidia
+        name: "cockpit-nvidia"
+        repo: teaguesterling/cockpit-nvidia
+        description: "Cockpit plugin showing Nvidia GPU status via nvidia-smi — live utilization, memory, temperature, power, and compute processes"
+        features:
+          - "Live-polled GPU utilization + memory"
+          - "Temperature, power, fan"
+          - "Compute process list"
         badges: [issues]
 
   experimental:

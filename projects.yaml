@@ -326,17 +326,6 @@ categories:
           - "Configurable behavior"
         badges: [issues]
 
-      - id: dotfiles
-        name: ".dotfiles"
-        repo: teaguesterling/.dotfiles
-        description: "Cross-system development configuration optimized for tmux + vim workflow"
-        features:
-          - "Session-specific bash history per tmux session"
-          - "Terminator-style tmux keybindings"
-          - "Seamless vim/tmux navigation"
-          - "System clipboard integration"
-        badges: [issues]
-
       - id: ghud
         name: "ghud"
         repo: teaguesterling/ghud
@@ -402,6 +391,24 @@ categories:
           - "Source code querying with selectors"
           - "Code manipulation"
           - "Multi-language support"
+        badges: [issues]
+
+      - id: sapartition
+        name: "sapartition"
+        repo: teaguesterling/sapartition
+        description: "SQLAlchemy table partitioning and query splitting"
+        features:
+          - "Table partitioning for SQLAlchemy"
+          - "Query splitting across partitions"
+        badges: [issues]
+        status: experimental
+
+      - id: installation_utilities
+        name: "installation-utilities"
+        repo: teaguesterling/installation-utilities
+        description: "Scripts and utilities to aid installation of various packages and programs"
+        features:
+          - "Install and setup helper scripts"
         badges: [issues]
 
   agent_suite:
@@ -613,6 +620,40 @@ categories:
           - "Machine learning on protein structure"
         role: contributor
         institution: "Stanford"
+
+      - id: pocketfeaturedb
+        name: "PocketFEATURE"
+        repo: teaguesterling/pocketfeaturedb
+        description: "Python implementation of PocketFEATURE — pyFEATURE wrappers plus pocket-comparison scripts for matching protein microenvironments"
+        features:
+          - "pyFEATURE: Python wrappers for FEATURE binaries"
+          - "PocketFEATURE pocket-comparison scripts"
+          - "Bundled background data"
+        role: author
+        institution: "Stanford"
+        badges: [issues]
+
+      - id: surface_sphere_map
+        name: "surface-sphere-map"
+        repo: teaguesterling/surface-sphere-map
+        description: "Maps protein molecular-surface properties onto a sphere for structural analysis (from MSRoll surface output)"
+        features:
+          - "Projects PDB surfaces to a spherical map"
+          - "Configurable voxel resolution"
+        role: author
+        badges: [issues]
+
+      - id: aggregator_advisor_example
+        name: "aggregator-advisor-example"
+        repo: teaguesterling/aggregator-advisor-example
+        description: "Example chemical-database web app (Flask + SQLAlchemy + RDKit via rdalchemy) demonstrating functional similarity indexing"
+        features:
+          - "Flask + SQLAlchemy chemical database"
+          - "RDKit integration through rdalchemy"
+          - "Functional indexes for similarity search"
+        role: author
+        note: "Archived reference/example"
+        badges: [issues]
 
 # Display settings
 display:

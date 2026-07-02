@@ -649,6 +649,19 @@ projects:
     badges: [issues]
     role: author
 
+  - id: rdalchemy
+    name: rdalchemy
+    category: Academic & Research
+    repo: teaguesterling/rdalchemy
+    description: RDKit integration for SQLAlchemy — map RDKit molecule and fingerprint types to SQL columns for cheminformatics
+      queries (built for ZINC)
+    features:
+    - Mol and Bfp SQLAlchemy column types
+    - Tanimoto similarity thresholds in ORM queries
+    - RDKit-Postgres cheminformatics support
+    badges: [issues]
+    role: author
+
   - id: aggregator_advisor_example
     name: aggregator-advisor-example
     category: Academic & Research

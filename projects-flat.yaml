@@ -200,18 +200,6 @@ projects:
     badges: [issues]
 
   # DuckDB Extensions - Science & Research
-  - id: geneducks
-    name: geneducks
-    category: DuckDB Extensions
-    subcategory: Science & Research
-    repo: teaguesterling/geneducks
-    description: Genetic data analysis extension for bioinformatics workflows
-    features:
-    - Genetic data parsing
-    - Sequence analysis
-    badges: [build, issues]
-    status: development
-
   - id: plinking_duck
     name: plinking_duck
     category: DuckDB Extensions
@@ -623,55 +611,3 @@ projects:
     - Machine learning on protein structure
     role: contributor
     institution: Stanford
-
-  - id: pocketfeaturedb
-    name: PocketFEATURE
-    category: Academic & Research
-    repo: teaguesterling/pocketfeaturedb
-    description: Python implementation of PocketFEATURE — pyFEATURE wrappers plus pocket-comparison scripts for matching protein
-      microenvironments
-    features:
-    - 'pyFEATURE: Python wrappers for FEATURE binaries'
-    - PocketFEATURE pocket-comparison scripts
-    - Bundled background data
-    badges: [issues]
-    role: author
-    institution: Stanford
-
-  - id: surface_sphere_map
-    name: surface-sphere-map
-    category: Academic & Research
-    repo: teaguesterling/surface-sphere-map
-    description: Maps protein molecular-surface properties onto a sphere for structural analysis (from MSRoll surface output)
-    features:
-    - Projects PDB surfaces to a spherical map
-    - Configurable voxel resolution
-    badges: [issues]
-    role: author
-
-  - id: rdalchemy
-    name: rdalchemy
-    category: Academic & Research
-    repo: teaguesterling/rdalchemy
-    description: RDKit integration for SQLAlchemy — map RDKit molecule and fingerprint types to SQL columns for cheminformatics
-      queries (built for ZINC)
-    features:
-    - Mol and Bfp SQLAlchemy column types
-    - Tanimoto similarity thresholds in ORM queries
-    - RDKit-Postgres cheminformatics support
-    badges: [issues]
-    role: author
-
-  - id: aggregator_advisor_example
-    name: aggregator-advisor-example
-    category: Academic & Research
-    repo: teaguesterling/aggregator-advisor-example
-    description: Example chemical-database web app (Flask + SQLAlchemy + RDKit via rdalchemy) demonstrating functional similarity
-      indexing
-    features:
-    - Flask + SQLAlchemy chemical database
-    - RDKit integration through rdalchemy
-    - Functional indexes for similarity search
-    badges: [issues]
-    role: author
-    note: Archived reference/example

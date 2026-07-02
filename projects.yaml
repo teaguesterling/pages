@@ -204,16 +204,6 @@ categories:
         title: "Science & Research"
         description: "Extensions for scientific computing and research applications"
         projects:
-          - id: geneducks
-            name: "geneducks"
-            repo: teaguesterling/geneducks
-            description: "Genetic data analysis extension for bioinformatics workflows"
-            features:
-              - "Genetic data parsing"
-              - "Sequence analysis"
-            badges: [build, issues]
-            status: development
-
           - id: plinking_duck
             name: "plinking_duck"
             repo: teaguesterling/plinking_duck
@@ -620,51 +610,6 @@ categories:
           - "Machine learning on protein structure"
         role: contributor
         institution: "Stanford"
-
-      - id: pocketfeaturedb
-        name: "PocketFEATURE"
-        repo: teaguesterling/pocketfeaturedb
-        description: "Python implementation of PocketFEATURE — pyFEATURE wrappers plus pocket-comparison scripts for matching protein microenvironments"
-        features:
-          - "pyFEATURE: Python wrappers for FEATURE binaries"
-          - "PocketFEATURE pocket-comparison scripts"
-          - "Bundled background data"
-        role: author
-        institution: "Stanford"
-        badges: [issues]
-
-      - id: surface_sphere_map
-        name: "surface-sphere-map"
-        repo: teaguesterling/surface-sphere-map
-        description: "Maps protein molecular-surface properties onto a sphere for structural analysis (from MSRoll surface output)"
-        features:
-          - "Projects PDB surfaces to a spherical map"
-          - "Configurable voxel resolution"
-        role: author
-        badges: [issues]
-
-      - id: rdalchemy
-        name: "rdalchemy"
-        repo: teaguesterling/rdalchemy
-        description: "RDKit integration for SQLAlchemy — map RDKit molecule and fingerprint types to SQL columns for cheminformatics queries (built for ZINC)"
-        features:
-          - "Mol and Bfp SQLAlchemy column types"
-          - "Tanimoto similarity thresholds in ORM queries"
-          - "RDKit-Postgres cheminformatics support"
-        role: author
-        badges: [issues]
-
-      - id: aggregator_advisor_example
-        name: "aggregator-advisor-example"
-        repo: teaguesterling/aggregator-advisor-example
-        description: "Example chemical-database web app (Flask + SQLAlchemy + RDKit via rdalchemy) demonstrating functional similarity indexing"
-        features:
-          - "Flask + SQLAlchemy chemical database"
-          - "RDKit integration through rdalchemy"
-          - "Functional indexes for similarity search"
-        role: author
-        note: "Archived reference/example"
-        badges: [issues]
 
 # Display settings
 display:

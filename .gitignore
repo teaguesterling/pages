@@ -14,3 +14,15 @@ projects-flat.yaml
 !.lq/hooks/
 !.lq/config.toml
 !.lq/commands.toml
+
+# Security-review working docs — LOCAL only, never publish (this is a public repo)
+private/
+code-review-findings-*.md
+code-review-prompt.md
+SESSION-STATE-*.md
+
+# Local agent / dev tooling (not site content)
+.bird/
+.fledgling-*
+.mcp.json
+CLAUDE.md

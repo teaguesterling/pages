@@ -84,6 +84,15 @@ categories:
               - "Fast extraction patterns"
             badges: [build, issues]
 
+          - id: duckdb_panduck
+            name: "panduck"
+            repo: teaguesterling/duckdb_panduck
+            description: "Native in-process document conversion and AST extraction for DuckDB"
+            features:
+              - "In-process document conversion"
+              - "Document AST extraction"
+            badges: [build, issues]
+
       code_analysis:
         title: "Code & Development"
         description: "Extensions for analyzing code, parsing queries, and developer workflows"
@@ -399,6 +408,16 @@ categories:
         description: "Scripts and utilities to aid installation of various packages and programs"
         features:
           - "Install and setup helper scripts"
+        badges: [issues]
+
+      - id: duckeye
+        name: "duckeye"
+        repo: teaguesterling/duckeye
+        description: "Read documents in the terminal — markdown, HTML, DOCX, PDF, EPUB, notebooks, and source-code ASTs — via DuckDB"
+        features:
+          - "Renders many document formats in the terminal"
+          - "Query source-code ASTs with CSS selectors"
+          - "Built on DuckDB duck_blocks and sitting_duck"
         badges: [issues]
 
   agent_suite:

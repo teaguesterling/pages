@@ -88,6 +88,19 @@ categories:
         title: "Code & Development"
         description: "Extensions for analyzing code, parsing queries, and developer workflows"
         projects:
+          - id: duckent
+            name: "duckent"
+            repo: teaguesterling/duckent
+            description: "Tree semantics for ordered relations: the ROWS contract and CSS-selector MATCH that sitting_duck and duck_block_utils build on"
+            features:
+              - "One selector semantics under every parser"
+              - "CREATE TREE / USING TREE / MATCH design for DuckDB 2.0"
+              - "Any adjacency list conforms via one recursive CTE"
+              - "Interactive lesson: from grep to CREATE TREE"
+            badges: [issues]
+            status: experimental
+            docs_url: "https://teaguesterling.github.io/pages/static/tree-contract-lesson.html"
+
           - id: sitting_duck
             name: "sitting_duck"
             repo: teaguesterling/sitting_duck

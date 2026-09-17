@@ -524,6 +524,35 @@ categories:
           - "Embeddable woollama.core library"
         badges: [issues]
 
+  tiiny:
+    title: "Tiiny Pocket"
+    description: "Tools for the Tiiny AI Pocket Lab, an on-device NPU box: a companion CLI and an offline librarian that cites real pages or abstains"
+    icon: "cpu"
+
+    projects:
+      - id: ttt
+        name: "TTt"
+        repo: teaguesterling/TTt
+        description: "Teague's Tiiny Tools — companion CLI, device API helpers, diagnostics, and the recipe for running the desktop app natively on Linux"
+        features:
+          - "ttt ask / code / prompt: agentic and one-shot prompts against the device"
+          - "Image, embedding, OCR, speech-to-text, text-to-speech, and music generation"
+          - "Model load/unload with aliases, NPU budget, health and doctor checks"
+          - "Pipe-friendly: stdin in, stdout out, progress on stderr"
+        badges: [issues, license]
+
+      - id: tiibrarian
+        name: "tiibrarian"
+        repo: teaguesterling/tiibrarian
+        description: "The Tiiny's librarian: offline answers that cite a real page, or say they don't know"
+        features:
+          - "Every claim must quote a span verbatim from the page it cites"
+          - "Abstains instead of confabulating when nothing survives"
+          - "Two-stage cosine search over on-device page vectors (1.3M pages verified)"
+          - "Hermetic tests run with no device and no network"
+        badges: [issues]
+        status: experimental
+
   cosmic_desktop:
     title: "COSMIC Desktop"
     description: "Tools and AI integrations for the COSMIC desktop environment"

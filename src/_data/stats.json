@@ -25,7 +25,6 @@
     "teaguesterling/duckdb_zim": 6,
     "teaguesterling/duckent": 0,
     "teaguesterling/duckeye": 3,
-    "teaguesterling/duckhts": 0,
     "teaguesterling/duck_hunt": 7,
     "teaguesterling/ducklog": 0,
     "teaguesterling/duck_tails": 25,
@@ -66,7 +65,9 @@
     "teaguesterling/duckdb_mcp": 1063,
     "teaguesterling/duckdb_func_apply": 725,
     "teaguesterling/plinking_duck": 728,
-    "teaguesterling/duckdb_extension_parser_tools": 3975
+    "teaguesterling/duckdb_extension_parser_tools": 3975,
+    "teaguesterling/duckdb_zim": 1083,
+    "teaguesterling/duckdb_panduck": 510
   },
   "downloads_source": "community-extensions.duckdb.org",
   "last_updated": "2026-09-16T04:00:29.752Z"

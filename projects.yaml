@@ -235,14 +235,6 @@ categories:
               - "Genetic data analysis"
             badges: [build, issues]
 
-          - id: duckhts
-            name: "duckhts"
-            repo: teaguesterling/duckhts
-            description: "htslib-based DuckDB extension for high-throughput sequencing file formats (SAM/BAM/VCF, …)"
-            features:
-              - "Read HTS/genomics formats via htslib"
-              - "Query sequencing data as tables"
-            badges: [issues]
 
   # Extensions I've contributed to but didn't author
   duckdb_contributions:

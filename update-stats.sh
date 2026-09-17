@@ -70,6 +70,8 @@ extension_name_map = {
     'teaguesterling/fledgling': 'fledgling',
     'teaguesterling/plinking_duck': 'plinking_duck',
     'teaguesterling/duckdb_extension_parser_tools': 'parser_tools',
+    'teaguesterling/duckdb_zim': 'zim',
+    'teaguesterling/duckdb_panduck': 'panduck',
 }
 
 repo_downloads = {}

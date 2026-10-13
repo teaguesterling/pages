@@ -29,6 +29,34 @@ layout: base.njk
   {% endfor %}
 </section>
 
+{# Composition -- the extensions used together; snippets are verified by execution #}
+{% if projects.composition %}
+{% set comp = projects.composition %}
+<section class="category composition" id="composition">
+  <header class="category-header">
+    <h2>{{ comp.title }}</h2>
+    <p>{{ comp.description }}</p>
+    {% if comp.install %}<pre class="composition-install"><code>{{ comp.install }}</code></pre>{% endif %}
+  </header>
+
+  <div class="composition-grid">
+    {% for ex in comp.examples %}
+    <article class="composition-example">
+      <h3 class="composition-title">{{ ex.title }}</h3>
+      <p class="composition-exts">
+        {% for e in ex.extensions %}<code class="ext-chip">{{ e }}</code>{% endfor %}
+      </p>
+      <pre class="composition-sql"><code>{{ ex.sql | trim }}</code></pre>
+      {% if ex.output %}<pre class="composition-output" aria-label="query result"><code>{{ ex.output | trim }}</code></pre>{% endif %}
+      {% if ex.note %}<p class="composition-note">{{ ex.note }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if comp.footnote %}<p class="composition-footnote">{{ comp.footnote }}</p>{% endif %}
+</section>
+{% endif %}
+
 {# DuckDB Contributions #}
 {% set category = projects.categories.duckdb_contributions %}
 <section class="category category--contributions" id="duckdb-contributions">

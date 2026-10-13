@@ -493,3 +493,71 @@ main {
     font-size: 1.5rem;
   }
 }
+
+/* Composition examples -- the extensions used together */
+.composition .category-header { margin-bottom: 1.25rem; }
+.composition-install {
+  margin: 0.75rem 0 0;
+  padding: 0.6rem 0.8rem;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  overflow-x: auto;
+}
+.composition-grid { display: grid; gap: 1.25rem; }
+.composition-example {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.25rem 1.25rem;
+  transition: border-color var(--transition);
+}
+.composition-example:hover { border-color: var(--color-border-hover); }
+.composition-title { margin: 0 0 0.5rem; font-size: 1.02rem; font-weight: 600; }
+.composition-exts { margin: 0 0 0.85rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ext-chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  color: var(--color-link);
+}
+.composition-sql, .composition-output {
+  margin: 0 0 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre;
+}
+.composition-sql {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+/* The real result of running the snippet above, not an illustration. */
+.composition-output {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-secondary);
+}
+.composition-note { margin: 0; font-size: 0.88rem; color: var(--color-text-secondary); }
+.composition-footnote {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+@media (min-width: 980px) {
+  .composition-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .composition-example:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}

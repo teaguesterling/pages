@@ -20,6 +20,88 @@ badges:
   license:
     template: "https://img.shields.io/github/license/{repo}"
 
+# Composition examples -- how the extensions work together.
+# EVERY snippet below was run against the extensions as SERVED by the community
+# registry, and the `output` is the real result, not an illustration. If you change
+# a snippet, re-run it: a published example that does not work is worse than none.
+composition:
+  title: "Composition"
+  description: >-
+    These extensions are built to be used together. Each reader turns a different format
+    into the same duck_block type, so one set of SQL works across all of them -- and none
+    of the readers depends on any other.
+  install: "INSTALL markdown FROM community; INSTALL webbed FROM community; INSTALL duck_block_utils FROM community;"
+  examples:
+    - title: "A markdown file's table of contents"
+      extensions: ["markdown", "duck_block_utils"]
+      sql: |
+        LOAD markdown; LOAD duck_block_utils;
+
+        SELECT level, title
+        FROM duck_blocks_toc_rows(
+               (SELECT list(b) FROM read_markdown_blocks('README.md') b)
+             );
+      output: |
+        ┌───────┬───────────────────────────┐
+        │ level │           title           │
+        ├───────┼───────────────────────────┤
+        │     1 │ DuckDB Markdown Extension │
+        │     2 │ Features                  │
+        │     2 │ Installation              │
+        │     3 │ Loading the Extension     │
+        └───────┴───────────────────────────┘
+      note: >-
+        markdown parses the file; duck_block_utils walks the structure. The reader knows
+        nothing about tables of contents, and the walker knows nothing about markdown.
+    - title: "HTML, through the same type"
+      extensions: ["webbed", "duck_block_utils"]
+      sql: |
+        LOAD webbed; LOAD duck_block_utils;
+
+        SELECT b.element_type, b.content
+        FROM (SELECT unnest(
+                html_to_duck_blocks('<h1>Title</h1><p>Hi there</p><h2>Sub</h2>')
+              ) AS b)
+        WHERE b.kind = 'block';
+      output: |
+        ┌──────────────┬──────────┐
+        │ element_type │ content  │
+        ├──────────────┼──────────┤
+        │ heading      │ Title    │
+        │ paragraph    │ Hi there │
+        │ heading      │ Sub      │
+        └──────────────┴──────────┘
+      note: >-
+        Same element types, same columns, different format. A query written against one
+        reader's output runs against the other's.
+    - title: "Two formats in one query, validated by a third extension"
+      extensions: ["markdown", "webbed", "duck_block_utils"]
+      sql: |
+        LOAD markdown; LOAD webbed; LOAD duck_block_utils;
+
+        WITH md   AS (SELECT list(b) AS blocks FROM read_markdown_blocks('README.md') b),
+             html AS (SELECT html_to_duck_blocks('<h1>Title</h1><p>Hi</p>') AS blocks)
+        SELECT 'markdown' AS source, len(blocks) AS blocks,
+               (duck_blocks_validate(blocks)).valid AS conforms FROM md
+        UNION ALL
+        SELECT 'html', len(blocks), (duck_blocks_validate(blocks)).valid FROM html;
+      output: |
+        ┌──────────┬────────┬──────────┐
+        │  source  │ blocks │ conforms │
+        ├──────────┼────────┼──────────┤
+        │ markdown │   1339 │ true     │
+        │ html     │      2 │ true     │
+        └──────────┴────────┴──────────┘
+      note: >-
+        This is the part that makes the suite a suite. Two independently built extensions
+        emit the identical STRUCT, a third validates both against a published spec, and a
+        UNION ALL across them type-checks -- with no dependency between any of the three.
+  footnote: >-
+    They agree because the vocabulary is versioned, not because they are linked: there is a
+    published spec, one vendorable header of constants, and a drift check that fails CI when
+    a consumer's copy disagrees by value -- a rename is a compile error, but a changed value
+    is silent.
+
 # Project categories
 categories:
   duckdb_extensions:

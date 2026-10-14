@@ -124,11 +124,10 @@ composition:
       sql: |
         LOAD scalarfs; LOAD webbed; LOAD duck_block_utils;
 
-        SELECT b.element_type, b.content
-        FROM read_text('data:,%3Ch1%3EInline%3C/h1%3E%3Cp%3ENo%20file%20needed%3C/p%3E') f,
-             LATERAL (SELECT unnest(html_to_duck_blocks(f.content)) AS b)
-        WHERE b.kind = 'block'
-        ORDER BY b.element_order;
+        SELECT element_type, content
+        FROM read_html_blocks('data:,%3Ch1%3EInline%3C/h1%3E%3Cp%3ENo%20file%20needed%3C/p%3E')
+        WHERE kind = 'block'
+        ORDER BY element_order;
       output: |
         ┌──────────────┬────────────────┐
         │ element_type │    content     │
@@ -138,8 +137,29 @@ composition:
         └──────────────┴────────────────┘
       note: >-
         scalarfs is what serves the data: URL -- controlled by running the same query
-        without it loaded, where read_text errors. The fetch is core DuckDB, so anything
-        that provides a filesystem slots in underneath unchanged.
+        without it loaded, where it errors. webbed's reader opens whatever path DuckDB can
+        resolve, with no check on the file extension, so a URL carrying no filename works.
+    - title: "A live web page, straight into blocks"
+      extensions: ["httpfs", "webbed", "duck_block_utils"]
+      sql: |
+        LOAD httpfs; LOAD webbed; LOAD duck_block_utils;
+
+        SELECT element_type, left(content, 42) AS content
+        FROM read_html_blocks('https://example.com/')
+        WHERE kind = 'block'
+        ORDER BY element_order;
+      output: |
+        ┌──────────────┬────────────────────────────────────────────┐
+        │ element_type │                  content                   │
+        ├──────────────┼────────────────────────────────────────────┤
+        │ paragraph    │ This domain is for use in documentation ex │
+        └──────────────┴────────────────────────────────────────────┘
+      note: >-
+        Core httpfs fetches it, webbed parses it, duck_block_utils types it -- and the same
+        slot takes any filesystem extension, so a caching or object-storage layer drops in
+        without the reader knowing. Ran against the live page; example.com is one paragraph
+        of body content, which is why the outline is a single row.
+
     - title: "Two formats in one query, validated by a third extension"
       extensions: ["markdown", "webbed", "duck_block_utils"]
       sql: |

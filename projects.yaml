@@ -21,15 +21,17 @@ badges:
     template: "https://img.shields.io/github/license/{repo}"
 
 # Composition examples -- how the extensions work together.
-# EVERY snippet below was run against the extensions as SERVED by the community
-# registry, and the `output` is the real result, not an illustration. If you change
-# a snippet, re-run it: a published example that does not work is worse than none.
+# EVERY snippet below was RUN against the extensions as SERVED by the community registry,
+# and each `output` is that run's stdout COPIED VERBATIM -- including DuckDB's own column
+# alignment. Do not retype or tidy an output block: the first version of this section
+# right-aligned the integers because they looked better that way, which is precisely the
+# small fabrication the word "verified" is supposed to rule out. Re-run instead.
 composition:
   title: "Composition"
   description: >-
-    These extensions are built to be used together. Each reader turns a different format
-    into the same duck_block type, so one set of SQL works across all of them -- and none
-    of the readers depends on any other.
+    These extensions are built to be used together. Readers turn different formats into the
+    same duck_block type, and other extensions supply the filesystems those readers open --
+    git refs, ZIM archives, data: URLs -- with no extension depending on any other.
   install: "INSTALL markdown FROM community; INSTALL webbed FROM community; INSTALL duck_block_utils FROM community;"
   examples:
     - title: "A markdown file's table of contents"
@@ -45,14 +47,15 @@ composition:
         ┌───────┬───────────────────────────┐
         │ level │           title           │
         ├───────┼───────────────────────────┤
-        │     1 │ DuckDB Markdown Extension │
-        │     2 │ Features                  │
-        │     2 │ Installation              │
-        │     3 │ Loading the Extension     │
+        │ 1     │ DuckDB Markdown Extension │
+        │ 2     │ Features                  │
+        │ 2     │ Installation              │
+        │ 3     │ Loading the Extension     │
         └───────┴───────────────────────────┘
       note: >-
-        markdown parses the file; duck_block_utils walks the structure. The reader knows
-        nothing about tables of contents, and the walker knows nothing about markdown.
+        Run in the duckdb_markdown checkout. markdown parses the file; duck_block_utils walks
+        the structure. The reader knows nothing about tables of contents, and the walker
+        knows nothing about markdown.
     - title: "HTML, through the same type"
       extensions: ["webbed", "duck_block_utils"]
       sql: |
@@ -74,6 +77,69 @@ composition:
       note: >-
         Same element types, same columns, different format. A query written against one
         reader's output runs against the other's.
+    - title: "The table of contents as of any git commit"
+      extensions: ["duck_tails", "markdown", "duck_block_utils"]
+      sql: |
+        LOAD duck_tails; LOAD markdown; LOAD duck_block_utils;
+
+        SELECT level, title
+        FROM duck_blocks_toc_rows(
+               (SELECT list(b) FROM read_markdown_blocks('git://README.md@HEAD') b)
+             );
+      output: |
+        ┌───────┬───────────────────────────┐
+        │ level │           title           │
+        ├───────┼───────────────────────────┤
+        │ 1     │ DuckDB Markdown Extension │
+        │ 2     │ Features                  │
+        │ 2     │ Installation              │
+        └───────┴───────────────────────────┘
+      note: >-
+        duck_tails registers a git:// filesystem and markdown opens it through DuckDB's
+        FileSystem API, so the reader needs no git support at all -- swap @HEAD for a tag
+        and you get that release's structure. Three extensions, no dependency between them.
+    - title: "An offline Wikipedia article's structure"
+      extensions: ["zim", "webbed", "duck_block_utils"]
+      sql: |
+        LOAD zim; LOAD webbed; LOAD duck_block_utils;
+
+        SELECT level, title
+        FROM duck_blocks_toc_rows(
+               (SELECT html_to_duck_blocks(decode(zim_get_content('wikipedia.zim', path)))
+                FROM read_zim('wikipedia.zim')
+                WHERE NOT is_redirect AND title = 'Amphibian' LIMIT 1)
+             );
+      output: |
+        ┌───────┬───────────┐
+        │ level │   title   │
+        ├───────┼───────────┤
+        │ 1     │ Amphibian │
+        └───────┴───────────┘
+      note: >-
+        zim serves the article out of the archive, webbed turns its HTML into blocks, and
+        duck_block_utils walks them -- the same walker as the markdown example above. Run
+        against a 100-article mini archive, which is why the outline is short.
+    - title: "A document with no file at all"
+      extensions: ["scalarfs", "webbed", "duck_block_utils"]
+      sql: |
+        LOAD scalarfs; LOAD webbed; LOAD duck_block_utils;
+
+        SELECT b.element_type, b.content
+        FROM read_text('data:,%3Ch1%3EInline%3C/h1%3E%3Cp%3ENo%20file%20needed%3C/p%3E') f,
+             LATERAL (SELECT unnest(html_to_duck_blocks(f.content)) AS b)
+        WHERE b.kind = 'block'
+        ORDER BY b.element_order;
+      output: |
+        ┌──────────────┬────────────────┐
+        │ element_type │    content     │
+        ├──────────────┼────────────────┤
+        │ heading      │ Inline         │
+        │ paragraph    │ No file needed │
+        └──────────────┴────────────────┘
+      note: >-
+        scalarfs is what serves the data: URL -- controlled by running the same query
+        without it loaded, where read_text errors. The fetch is core DuckDB, so anything
+        that provides a filesystem slots in underneath unchanged.
     - title: "Two formats in one query, validated by a third extension"
       extensions: ["markdown", "webbed", "duck_block_utils"]
       sql: |
@@ -89,8 +155,8 @@ composition:
         ┌──────────┬────────┬──────────┐
         │  source  │ blocks │ conforms │
         ├──────────┼────────┼──────────┤
-        │ markdown │   1339 │ true     │
-        │ html     │      2 │ true     │
+        │ markdown │ 1339   │ true     │
+        │ html     │ 2      │ true     │
         └──────────┴────────┴──────────┘
       note: >-
         This is the part that makes the suite a suite. Two independently built extensions

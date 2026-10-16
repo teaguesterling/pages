@@ -196,16 +196,15 @@ categories:
     # v2.0-cyanoptera build leg was green; "untested" means the repo has no 2.0
     # build leg at all, so there is no signal either way rather than a known problem.
     duckdb2_note: >-
-      DuckDB 2.0 readiness below is read from each repository's own CI, measured
-      2026-10-16. "2.0 verified" means that repo's latest build on the
-      v2.0-cyanoptera line was green. "2.0 untested" means the repo has no 2.0
-      build leg yet, which is an absence of evidence rather than a known failure.
-      The community registry now builds every extension against DuckDB 2.0 by
-      default, so this is the line that matters for installs.
-    title: "DuckDB Extensions"
-    description: "Extensions for DuckDB, the fast in-process analytical database"
-    icon: "database"
-
+      DuckDB 2.0 status below is measured, not asserted, and each state has a different
+      source. "2.0 released" means a 2.0-keyed artifact is actually published and
+      installable from the community registry
+      (community-extensions.duckdb.org/v2.0.0-alpha46057/...) -- checked 2026-10-16.
+      "2.0 ready" means that repo's own CI builds green on the 2.0 line but no 2.0
+      artifact is published yet; a descriptor merge is what publishes one, since the
+      registry now deploys against DuckDB 2.0 by default. "2.0 untested" means the repo
+      has no 2.0 build leg at all, which is an absence of evidence rather than a known
+      failure. Every extension here remains released and installable on v1.5.6.
     subcategories:
       document_processing:
         title: "Document Processing"
@@ -213,7 +212,7 @@ categories:
         projects:
           - id: duckdb_webbed
             name: "webbed"
-            duckdb2: verified
+            duckdb2: ready
             duckdb2_note: "Already builds against the registry's own DuckDB 2.0 commit, not just the 2.0 branch."
             repo: teaguesterling/duckdb_webbed
             description: "Comprehensive XML and HTML processing with XPath extraction, schema inference, and format conversion"
@@ -227,7 +226,7 @@ categories:
 
           - id: duckdb_markdown
             name: "duckdb_markdown"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/duckdb_markdown
             description: "Comprehensive Markdown processing with file reading, content extraction, and block-level parsing"
             features:
@@ -239,7 +238,7 @@ categories:
 
           - id: duckdb_yaml
             name: "duckdb_yaml"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/duckdb_yaml
             description: "YAML file reading with native type support and multi-document handling"
             features:
@@ -250,7 +249,7 @@ categories:
 
           - id: duckdb_duck_block_utils
             name: "duck_block_utils"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/duckdb_duck_block_utils
             description: "Format-agnostic document block utilities with unified duck_block type and Pandoc AST conversion"
             features:
@@ -261,7 +260,7 @@ categories:
 
           - id: duckdb_read_lines
             name: "duckdb_read_lines"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/duckdb_read_lines
             description: "Simple parsers for fast extraction from line-based files"
             features:
@@ -271,7 +270,7 @@ categories:
 
           - id: duckdb_panduck
             name: "panduck"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/duckdb_panduck
             description: "Native in-process document conversion and AST extraction for DuckDB"
             features:
@@ -299,7 +298,7 @@ categories:
 
           - id: sitting_duck
             name: "sitting_duck"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/sitting_duck
             description: "AST analysis using Tree-sitter for 27 programming languages with semantic type extraction"
             features:
@@ -311,7 +310,8 @@ categories:
 
           - id: duck_hunt
             name: "duck_hunt"
-            duckdb2: verified
+            duckdb2: released
+            duckdb2_note: "First of the fleet with a published DuckDB 2.0 artifact: its descriptor merged after the registry switched its default build to the 2.0 line, which triggered a 2.0-keyed deploy."
             repo: teaguesterling/duck_hunt
             description: "Log parsing extension for 90+ development tools and CI/CD systems"
             features:
@@ -361,7 +361,7 @@ categories:
 
           - id: duckdb_zim
             name: "duckdb_zim"
-            duckdb2: verified
+            duckdb2: ready
             duckdb2_note: "2.0 legs green; the red build badge is an unrelated remote-search integration test."
             repo: teaguesterling/duckdb_zim
             description: "DuckDB extension for reading ZIM files — the offline web-archive format used by Kiwix/Wikipedia"
@@ -388,7 +388,7 @@ categories:
 
           - id: duckdb_func_apply
             name: "duckdb_func_apply"
-            duckdb2: verified
+            duckdb2: ready
             repo: teaguesterling/duckdb_func_apply
             description: "Dynamic function application allowing runtime invocation of functions by name"
             features:
@@ -424,7 +424,7 @@ categories:
         projects:
           - id: plinking_duck
             name: "plinking_duck"
-            duckdb2: verified
+            duckdb2: ready
             duckdb2_note: "2.0 legs green; the red build badge is a clang-tidy/format check."
             repo: teaguesterling/plinking_duck
             description: "DuckDB tools for Plink2 genetic data analysis"

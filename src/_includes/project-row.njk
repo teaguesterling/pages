@@ -15,7 +15,7 @@
       {# DuckDB 2.0 readiness, read from the repo's own CI (see duckdb2_note on the category) #}
       {% if project.duckdb2 %}
       <span class="duckdb2 duckdb2--{{ project.duckdb2 }}"
-            title="{% if project.duckdb2 == 'verified' %}Latest build on the v2.0-cyanoptera line was green{% else %}No DuckDB 2.0 build leg yet — no signal either way{% endif %}">2.0 {{ project.duckdb2 }}</span>
+            title="{% if project.duckdb2 == 'released' %}A DuckDB 2.0 artifact is published and installable from the community registry{% elif project.duckdb2 == 'ready' %}Builds green on the 2.0 line in CI; no 2.0 artifact published yet{% else %}No DuckDB 2.0 build leg yet — no signal either way{% endif %}">2.0 {{ project.duckdb2 }}</span>
       {% endif %}
     </div>
     <div class="project-brief">{{ project.description | truncate(100) }}</div>

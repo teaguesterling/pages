@@ -10,6 +10,9 @@ layout: base.njk
   <header class="category-header">
     <h2>{{ category.title }}</h2>
     <p>{{ category.description }}</p>
+    {% if category.duckdb2_note %}
+    <p class="category-duckdb2-note">{{ category.duckdb2_note }}</p>
+    {% endif %}
   </header>
 
   {% for subKey, subcategory in category.subcategories %}

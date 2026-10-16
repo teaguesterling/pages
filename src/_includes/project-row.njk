@@ -12,6 +12,11 @@
       {% if project.status %}
       <span class="project-status project-status--{{ project.status }}">{{ project.status }}</span>
       {% endif %}
+      {# DuckDB 2.0 readiness, read from the repo's own CI (see duckdb2_note on the category) #}
+      {% if project.duckdb2 %}
+      <span class="duckdb2 duckdb2--{{ project.duckdb2 }}"
+            title="{% if project.duckdb2 == 'verified' %}Latest build on the v2.0-cyanoptera line was green{% else %}No DuckDB 2.0 build leg yet — no signal either way{% endif %}">2.0 {{ project.duckdb2 }}</span>
+      {% endif %}
     </div>
     <div class="project-brief">{{ project.description | truncate(100) }}</div>
     <div class="project-badges-cell">
@@ -57,6 +62,10 @@
 
       {% if project.note %}
       <p class="project-note">{{ project.note }}</p>
+      {% endif %}
+
+      {% if project.duckdb2_note %}
+      <p class="project-note project-note--duckdb2">{{ project.duckdb2_note }}</p>
       {% endif %}
 
       <div class="project-links">

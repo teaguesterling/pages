@@ -561,3 +561,30 @@ main {
   .composition-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .composition-example:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
+
+/* DuckDB 2.0 readiness chips. Read from each repo's CI, not asserted by hand -- and the
+   category note carries the measurement date, because a status with no date becomes a
+   claim the moment it goes stale. */
+.duckdb2 {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.duckdb2--verified { color: #7ee787; background: rgba(46,160,67,0.14); border-color: rgba(46,160,67,0.4); }
+.duckdb2--untested { color: var(--color-text-muted); background: var(--color-bg-tertiary); border-color: var(--color-border); }
+.category-duckdb2-note {
+  margin: 0.75rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid var(--color-link);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+  max-width: 68ch;
+}
+.project-note--duckdb2 { border-left: 2px solid rgba(46,160,67,0.4); padding-left: 0.6rem; }

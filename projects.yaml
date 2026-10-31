@@ -199,7 +199,7 @@ categories:
       DuckDB 2.0 status below is measured, not asserted. "2.0 released" means a
       2.0-keyed artifact is published and installable from the community registry
       (community-extensions.duckdb.org/v2.0.0/...). An HTTP request confirmed each
-      artifact on 2026-10-30. A read of one binary's metadata footer checked that the
+      artifact on 2026-10-30, on both linux_amd64 and osx_arm64. A read of one binary's metadata footer checked that the
       path key is truthful; it reports v2.0.0. "2.0 ready" means that repo's CI builds
       green on the 2.0 line, but no 2.0 artifact is published. "2.0 untested" means the
       repo has no 2.0 build leg, which is an absence of evidence rather than a known

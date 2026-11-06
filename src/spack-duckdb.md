@@ -89,8 +89,11 @@ $ spack install duckdb-extensions@2.0.0 +site_signed +httpfs +fts \
 ```
 
 - The build links `libduckdb_static.a` from the `duckdb` prefix, so DuckDB is not compiled again.
-- Each dependency of the extension comes from a static Spack package that the recipe declares.
-  CMake does not look on the host, and a download during CMake fails.
+- Each C and C++ dependency of the extension comes from a static Spack package that the recipe
+  declares. CMake does not look on the host, and a download during CMake fails.
+- The Rust extensions (`delta`, `lance`, `vortex` and `rusty_sheet`) are different. Cargo
+  downloads their crates from crates.io and git during the build, at the versions in
+  `Cargo.lock`. The build cannot run with no network.
 - Before signing, the install step checks the binary: it fails on any shared dependency other
   than the C and C++ runtime, and on any RUNPATH.
 - The install step replaces store paths in the binary before it signs. A build cache otherwise
@@ -104,6 +107,8 @@ of trust. A signer that build code cannot reach is planned, but not done.
 
 - **Mirror:** `spack mirror create` with `@2.0.0` or `+site_signed` specs. Spack fetches the
   DuckDB source (102 MB) once for each mirror, because a resource needs a main archive.
+- A mirror does not hold the crates of the Rust extensions. Build them on a connected host,
+  and move them with a build cache.
 - **Build cache:** build on a connected host, then install from the cache. Use
   `padded_length` for the dependencies.
 
@@ -114,15 +119,16 @@ Measured on `linux_amd64` with GCC 13.3. Other platforms were not loaded.
 | | Core (23) | Community (19) |
 |---|---|---|
 | Pass in the open PRs | 11 | 9 |
-| Pass with planned follow-up package PRs | 20 | 17 |
+| Pass with planned follow-up PRs | 23 | 18 |
 
 A pass means all of these: the build ran with no network from fetched sources; the binary
 loaded with no network; a DuckDB without the key refused it; and it loaded after a build cache
-install of its whole dependency tree into an empty store with no network.
+install of its whole dependency tree into an empty store with no network. The Rust extensions
+are the exception to the first test: their builds had network access, for the crates.
 
 The follow-up PRs add or update the static dependencies that these extensions need, such as
 `croaring`, `minizip-ng`, `ada-url`, `cmark-gfm`, the Azure SDK, `aws-sdk-cpp`, `grpc` and
-`gdal`. The remaining extensions are `delta`, `vortex`, `lance` and `rusty_sheet` (Rust), and
+`gdal`. They also add `+site_signed` to the Rust extensions. The remaining extension is
 `bigquery`.
 
 ## Known limits

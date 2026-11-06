@@ -50,7 +50,7 @@ extensions are packages only, such as `duckdb-h3`. They are not variants of the 
 |---|---|---|
 | `@2.0.0` (default for core) | The published binary, as a Spack resource for each platform | sha256 by Spack, and the signature at each load |
 | `@latest` (default for community) | `INSTALL` from DuckDB, during the install step | an HTTPS copy of the same file, and the signature |
-| `+selfsigned` | A pinned git commit of the extension, built against the DuckDB source | the signature with your key |
+| `+site_signed` | A pinned git commit of the extension, built against the DuckDB source | the signature with your key |
 
 - `@2.0.0` works from a mirror with no network.
 - `@latest` needs network access in the install step. Two installs of one spec can get different
@@ -64,9 +64,9 @@ extensions are packages only, such as `duckdb-h3`. They are not variants of the 
 Stock DuckDB loads only extensions signed by the core or community keys. `duckdb` has two
 variants that change this:
 
-- `extension_keys=core,community,selfsigned` (default `core,community`): the keys to trust. The
+- `extension_keys=core,community,site` (default `core,community`): the keys to trust. The
   default applies no patch.
-- `extension_key=<sha256>`: the public key to trust for `selfsigned`, as the sha256 of its DER
+- `extension_key=<sha256>`: the public key to trust for `site`, as the sha256 of its DER
   form.
 
 ```console
@@ -79,13 +79,13 @@ $ openssl rsa -in ext-key.pem -pubout -outform DER | sha256sum
 The key must be RSA-2048, because a DuckDB signature has 256 bytes. The spec holds only the
 sha256. The key files stay outside of the spec, the prefix and any build cache.
 
-## Building from source with `+selfsigned`
+## Building from source with `+site_signed`
 
 ```console
 $ export DUCKDB_EXTENSION_PUBLIC_KEY=$PWD/ext-pub.pem
 $ export DUCKDB_EXTENSION_PRIVATE_KEY=$PWD/ext-key.pem
-$ spack install duckdb-extensions@2.0.0 +selfsigned +httpfs +fts \
-    ^duckdb extension_keys=core,community,selfsigned extension_key=5a57d3e5...
+$ spack install duckdb-extensions@2.0.0 +site_signed +httpfs +fts \
+    ^duckdb extension_keys=core,community,site extension_key=5a57d3e5...
 ```
 
 - The build links `libduckdb_static.a` from the `duckdb` prefix, so DuckDB is not compiled again.
@@ -102,12 +102,12 @@ of trust. A signer that build code cannot reach is planned, but not done.
 
 ## Air gap
 
-- **Mirror:** `spack mirror create` with `@2.0.0` or `+selfsigned` specs. Spack fetches the
+- **Mirror:** `spack mirror create` with `@2.0.0` or `+site_signed` specs. Spack fetches the
   DuckDB source (102 MB) once for each mirror, because a resource needs a main archive.
 - **Build cache:** build on a connected host, then install from the cache. Use
   `padded_length` for the dependencies.
 
-## Status of `+selfsigned`
+## Status of `+site_signed`
 
 Measured on `linux_amd64` with GCC 13.3. Other platforms were not loaded.
 
@@ -128,8 +128,8 @@ The follow-up PRs add or update the static dependencies that these extensions ne
 ## Known limits
 
 - `nanoarrow` at `@2.0.0` has a RUNPATH, so a build cache install makes its signature invalid.
-  `nanoarrow+selfsigned` has no RUNPATH.
-- `httpfs+selfsigned` uses `curl~nghttp2`, so it has no HTTP/2.
+  `nanoarrow+site_signed` has no RUNPATH.
+- `httpfs+site_signed` uses `curl~nghttp2`, so it has no HTTP/2.
 - Most extensions were only loaded, not exercised.
 
 </article>

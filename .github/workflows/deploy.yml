@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Daily, so new extension releases reach the Recent updates section and feed.xml without a push.
+  schedule:
+    - cron: "17 13 * * *"
   workflow_dispatch:
 
 permissions:

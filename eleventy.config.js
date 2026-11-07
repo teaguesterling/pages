@@ -54,6 +54,41 @@ export default function (eleventyConfig) {
     return num.toString();
   });
 
+  // Recent updates: the DuckDB extensions' GitHub releases (fetched into stats.json by update-stats.sh) merged with
+  // the hand-written notes in src/updates/, newest first. The index section and feed.xml both read this list.
+  eleventyConfig.addFilter("recentUpdates", function (notes, limit) {
+    const extensions = new Map();
+    const subcategories = this.ctx?.projects?.categories?.duckdb_extensions?.subcategories || {};
+    for (const sub of Object.values(subcategories)) {
+      for (const p of sub.projects || []) extensions.set(p.repo, p.name);
+    }
+    const releases = (this.ctx?.stats?.releases || [])
+      .filter((r) => extensions.has(r.repo))
+      .map((r) => ({
+        kind: "release",
+        project: extensions.get(r.repo),
+        title: `${extensions.get(r.repo)} ${r.tag}`,
+        date: new Date(r.published),
+        url: r.url,
+      }));
+    const written = (notes || []).map((n) => ({
+      kind: "note",
+      project: n.data.project || "",
+      title: n.data.title,
+      summary: n.data.summary || "",
+      date: n.date,
+      url: n.url,
+      // A getter, so only the feed reads a note's rendered content, after the note has rendered.
+      get content() {
+        return n.content;
+      },
+    }));
+    return [...written, ...releases].sort((a, b) => b.date - a.date).slice(0, limit || 10);
+  });
+
+  eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString());
+  eleventyConfig.addFilter("shortDate", (date) => new Date(date).toISOString().slice(0, 10));
+
   return {
     pathPrefix: "/pages/",
     dir: {

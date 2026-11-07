@@ -629,3 +629,71 @@ main {
   vertical-align: top;
 }
 .guide th { background: var(--color-bg-secondary); }
+
+/* Recent updates */
+.updates-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.update {
+  display: grid;
+  grid-template-columns: 6.5rem 4.5rem 1fr;
+  gap: 0.25rem 0.75rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.update time {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.update-kind {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.update--note .update-kind {
+  color: var(--color-warning);
+}
+
+.update a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.update a:hover {
+  color: var(--color-link-hover);
+}
+
+.update-summary {
+  grid-column: 3;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .update {
+    grid-template-columns: auto 1fr;
+  }
+
+  .update a,
+  .update-summary {
+    grid-column: 1 / -1;
+  }
+}
+
+.update-note .update-meta {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.update-note a {
+  color: var(--color-link);
+}

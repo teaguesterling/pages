@@ -1,6 +1,6 @@
 # Recent updates
 
-The index's "Recent updates" section and `feed.xml` (Atom) read one list, built by the `recentUpdates` filter in
+The index's "Recent updates" section (the newest 5), the `/updates/` page (the newest 50) and `feed.xml` (Atom) read one list, built by the `recentUpdates` filter in
 `eleventy.config.js`:
 
 - **Releases** of the DuckDB extensions come from GitHub. `update-stats.sh` fetches each repo's last 5 releases into

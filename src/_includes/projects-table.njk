@@ -1,0 +1,10 @@
+<div class="projects-table">
+  <div class="projects-table-header">
+    <div class="col-name">{{ "Package" if catKey == "spack_packages" else "Project" }}</div>
+    <div class="col-description">Description</div>
+    <div class="col-badges">Status</div>
+  </div>
+  {% for project in rows %}
+    {% include "project-row.njk" %}
+  {% endfor %}
+</div>

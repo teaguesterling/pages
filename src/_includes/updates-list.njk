@@ -1,0 +1,12 @@
+{# Set updates before the include: a list from the recentUpdates filter. #}
+<ul class="updates-list">
+  {% for u in updates %}
+  <li class="update update--{{ u.kind }}">
+    <time datetime="{{ u.date | isoDate }}">{{ u.date | shortDate }}</time>
+    <span class="update-kind">{{ "note" if u.kind == "note" else "release" }}</span>
+    <a href="{{ (u.url | url) if u.kind == 'note' else u.url }}">{{ u.title }}</a>
+    {% if u.summary %}<span class="update-summary">{{ u.summary }}</span>{% endif %}
+    {% if u.earlier and u.earlier.length %}<span class="update-summary">Also {% for e in u.earlier %}<a href="{{ e.url }}">{{ e.tag }}</a>{{ ", " if not loop.last }}{% endfor %}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>

@@ -8,6 +8,32 @@ site:
   # The scheme and host the site is served from. With pathPrefix in eleventy.config.js it makes the feed's absolute URLs.
   origin: "https://teaguesterling.github.io"
 
+# The site's pages. The index shows one card per area, and area.njk makes one page per area at /<key>/.
+# `categories` are keys under `categories:`, in page order. `composition: true` adds the composition section.
+areas:
+  - key: duckdb
+    title: "DuckDB"
+    description: "Extensions I wrote, examples that use them together, and extensions I contribute to"
+    categories: [duckdb_extensions, duckdb_contributions]
+    composition: true
+  - key: spack
+    title: "Spack"
+    description: "Spack packages I maintain, merged and in review"
+    categories: [spack_packages]
+    guide: "/spack-duckdb/"
+  - key: tools
+    title: "Tools and agents"
+    description: "Command-line tools, and infrastructure for AI agent safety and control"
+    categories: [tools, agent_suite]
+  - key: desktop
+    title: "Desktop and homelab"
+    description: "COSMIC desktop integrations, Cockpit panels and the Tiiny Pocket"
+    categories: [cosmic_desktop, cockpit, tiiny]
+  - key: research
+    title: "Research"
+    description: "Scientific software from my research career, and work in progress"
+    categories: [academic, experimental]
+
 # Badge configuration templates
 badges:
   build:

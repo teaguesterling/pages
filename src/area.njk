@@ -1,0 +1,20 @@
+---
+layout: base.njk
+pagination:
+  data: projects.areas
+  size: 1
+  alias: area
+permalink: "/{{ area.key }}/"
+eleventyComputed:
+  title: "{{ area.title }}"
+---
+
+{% set badges = projects.badges %}
+
+<p class="breadcrumb"><a href="{{ '/' | url }}">All projects</a> / {{ area.title }}</p>
+{% if area.guide %}<p class="area-guide">How to install the DuckDB extensions with Spack: <a href="{{ area.guide | url }}">the Spack guide</a>.</p>{% endif %}
+
+{% for catKey in area.categories %}
+  {% include "category-section.njk" %}
+  {% if loop.first and area.composition %}{% include "composition-section.njk" %}{% endif %}
+{% endfor %}

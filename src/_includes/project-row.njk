@@ -86,6 +86,12 @@
           Docs
         </a>
         {% endif %}
+        {% if project.spack_url %}
+        <a href="{{ project.spack_url }}" class="project-link project-link--spack">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3zM5 9.7l6 3.3v6.6l-6-3.3V9.7zm8 9.9V13l6-3.3v6.6l-6 3.3z"/></svg>
+          Spack
+        </a>
+        {% endif %}
         {% if project.upstream %}
         <a href="https://github.com/{{ project.upstream }}" class="project-link project-link--upstream">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5.41 21L12 14.42 18.59 21 20 19.59l-8-8-8 8L5.41 21zM12 4L4 12l1.41 1.41L12 6.83l6.59 6.58L20 12 12 4z"/></svg>

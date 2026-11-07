@@ -486,7 +486,278 @@ categories:
   spack_packages:
     title: "Spack Packages"
     description: "Spack packages I maintain"
-    projects: []
+    projects:
+      - id: spack-duckdb
+        name: "duckdb"
+        description: "DuckDB, the in-process analytical SQL database: CLI, C/C++ library and headers"
+        spack_url: "https://packages.spack.io/package.html?name=duckdb"
+        upstream: duckdb/duckdb
+
+      - id: spack-duckdb-extensions-core
+        name: "duckdb-extensions (core)"
+        description: "DuckDB's core extensions built as Spack packages, and a bundle that installs them together"
+        upstream: duckdb/duckdb
+        features:
+          - "duckdb-extensions (bundle)"
+          - "duckdb-avro"
+          - "duckdb-aws"
+          - "duckdb-azure"
+          - "duckdb-delta"
+          - "duckdb-ducklake"
+          - "duckdb-encodings"
+          - "duckdb-excel"
+          - "duckdb-fts"
+          - "duckdb-httpfs"
+          - "duckdb-iceberg"
+          - "duckdb-inet"
+          - "duckdb-lance"
+          - "duckdb-legacy-parser"
+          - "duckdb-mysql-scanner"
+          - "duckdb-postgres-scanner"
+          - "duckdb-quack"
+          - "duckdb-spatial"
+          - "duckdb-sqlite-scanner"
+          - "duckdb-sqlsmith"
+          - "duckdb-tpcds"
+          - "duckdb-unity-catalog"
+          - "duckdb-vortex"
+          - "duckdb-vss"
+        note: "In spack/spack-packages#7442 (open); source builds trusted by the Spack store in #7489 (open)"
+
+      - id: spack-duckdb-extensions-community
+        name: "duckdb-extensions (community)"
+        description: "DuckDB community extensions built as Spack packages"
+        upstream: duckdb/community-extensions
+        features:
+          - "duckdb-bigquery"
+          - "duckdb-cache-httpfs"
+          - "duckdb-duck-hunt"
+          - "duckdb-duck-tails"
+          - "duckdb-duckpgq"
+          - "duckdb-gcs"
+          - "duckdb-h3"
+          - "duckdb-markdown"
+          - "duckdb-mcp"
+          - "duckdb-mssql"
+          - "duckdb-nanoarrow"
+          - "duckdb-plinking-duck"
+          - "duckdb-rusty-sheet"
+          - "duckdb-scalarfs"
+          - "duckdb-sitting-duck"
+          - "duckdb-urlpattern"
+          - "duckdb-webbed"
+          - "duckdb-yaml"
+          - "duckdb-zipfs"
+        note: "In spack/spack-packages#7444 (open)"
+
+      - id: spack-ada-url
+        name: "ada-url"
+        description: "Ada, a fast WHATWG-compliant URL parser in C++"
+        upstream: ada-url/ada
+        note: "In spack/spack-packages#7467 (open)"
+
+      - id: spack-croaring
+        name: "croaring"
+        description: "CRoaring, a C and C++ library for compressed Roaring bitmaps"
+        upstream: RoaringBitmap/CRoaring
+        note: "In spack/spack-packages#7459 (open)"
+
+      - id: spack-simdutf
+        name: "simdutf"
+        description: "simdutf, SIMD-accelerated Unicode validation and transcoding"
+        upstream: simdutf/simdutf
+        note: "In spack/spack-packages#7462 (open)"
+
+      - id: spack-miniz
+        name: "miniz"
+        description: "miniz, a single-file zlib-compatible compression library in C"
+        upstream: richgel999/miniz
+        note: "In spack/spack-packages#7463 (open)"
+
+      - id: spack-minizip-ng
+        name: "minizip-ng"
+        description: "minizip-ng, a zip archive manipulation library in C"
+        upstream: zlib-ng/minizip-ng
+        note: "In spack/spack-packages#7460 (open)"
+
+      - id: spack-cmark-gfm
+        name: "cmark-gfm"
+        description: "cmark-gfm, GitHub's fork of the CommonMark reference parser"
+        upstream: github/cmark-gfm
+        note: "In spack/spack-packages#7466 (open)"
+
+      - id: spack-ldzip
+        name: "ldzip"
+        description: "LDZip, compression and random access for PLINK2 LD matrices"
+        upstream: 23andMe/LDZip
+        note: "In spack/spack-packages#7437 (open)"
+
+      - id: spack-plink2
+        name: "plink2"
+        description: "PLINK 2, whole-genome association analysis toolset"
+        spack_url: "https://packages.spack.io/package.html?name=plink2"
+        upstream: chrchang/plink-ng
+
+      - id: spack-regenie
+        name: "regenie"
+        description: "regenie, whole-genome regression for large GWAS"
+        spack_url: "https://packages.spack.io/package.html?name=regenie"
+        upstream: rgcgithub/regenie
+
+      - id: spack-bgen
+        name: "bgen"
+        description: "BGEN genotype file format reference implementation and tools"
+        spack_url: "https://packages.spack.io/package.html?name=bgen"
+        upstream: gavinband/bgen
+
+      - id: spack-pbwt
+        name: "pbwt"
+        description: "Positional Burrows-Wheeler Transform for genetic data"
+        spack_url: "https://packages.spack.io/package.html?name=pbwt"
+        upstream: richarddurbin/pbwt
+
+      - id: spack-kentutils
+        name: "kentutils"
+        description: "Jim Kent's UCSC command-line bioinformatics utilities"
+        spack_url: "https://packages.spack.io/package.html?name=kentutils"
+        upstream: ucscGenomeBrowser/kent
+
+      - id: spack-py-hail
+        name: "py-hail"
+        description: "Hail, cloud-native genomic dataframes (Python API)"
+        spack_url: "https://packages.spack.io/package.html?name=py-hail"
+        upstream: hail-is/hail
+
+      - id: spack-vep
+        name: "vep"
+        description: "Ensembl Variant Effect Predictor, its offline cache, and the Ensembl Perl APIs it uses"
+        spack_url: "https://packages.spack.io/package.html?name=vep"
+        upstream: Ensembl/ensembl-vep
+        features:
+          - "vep"
+          - "vep-cache"
+          - "perl-bio-ensembl"
+          - "perl-bio-ensembl-funcgen"
+          - "perl-bio-ensembl-io"
+          - "perl-bio-ensembl-variation"
+
+      - id: spack-perl-bio-bigfile
+        name: "perl-bio-bigfile"
+        description: "Bio::DB::BigFile, Perl interface to BigWig and BigBed files"
+        spack_url: "https://packages.spack.io/package.html?name=perl-bio-bigfile"
+
+      - id: spack-perl-http-tiny
+        name: "perl-http-tiny"
+        description: "HTTP::Tiny, a small HTTP/1.1 client for Perl"
+        spack_url: "https://packages.spack.io/package.html?name=perl-http-tiny"
+        upstream: Perl-Toolchain-Gang/HTTP-Tiny
+
+      - id: spack-spark
+        name: "spark"
+        description: "Apache Spark, an engine for large-scale data processing"
+        spack_url: "https://packages.spack.io/package.html?name=spark"
+        upstream: apache/spark
+
+      - id: spack-py-pyspark
+        name: "py-pyspark"
+        description: "PySpark, the Python bindings for Apache Spark"
+        spack_url: "https://packages.spack.io/package.html?name=py-pyspark"
+        upstream: apache/spark
+
+      - id: spack-py-py4j
+        name: "py-py4j"
+        description: "Py4J, access to Java objects from Python"
+        spack_url: "https://packages.spack.io/package.html?name=py-py4j"
+        upstream: py4j/py4j
+
+      - id: spack-awscli-v2
+        name: "awscli-v2"
+        description: "AWS CLI version 2, the unified command line for Amazon Web Services"
+        spack_url: "https://packages.spack.io/package.html?name=awscli-v2"
+        upstream: aws/aws-cli
+
+      - id: spack-py-awscrt
+        name: "py-awscrt"
+        description: "Python bindings for the AWS Common Runtime"
+        spack_url: "https://packages.spack.io/package.html?name=py-awscrt"
+        upstream: awslabs/aws-crt-python
+
+      - id: spack-py-maturin
+        name: "py-maturin"
+        description: "maturin, builds and publishes Rust crates as Python packages"
+        spack_url: "https://packages.spack.io/package.html?name=py-maturin"
+        upstream: pyo3/maturin
+
+      - id: spack-py-janus
+        name: "py-janus"
+        description: "janus, a thread-safe asyncio-aware queue for Python"
+        spack_url: "https://packages.spack.io/package.html?name=py-janus"
+        upstream: aio-libs/janus
+
+      - id: spack-py-jproperties
+        name: "py-jproperties"
+        description: "Java .properties file parser and writer for Python"
+        spack_url: "https://packages.spack.io/package.html?name=py-jproperties"
+        upstream: Tblue/python-jproperties
+
+      - id: spack-yq
+        name: "yq"
+        description: "yq, a portable YAML, JSON, XML, CSV and TOML processor"
+        spack_url: "https://packages.spack.io/package.html?name=yq"
+        upstream: mikefarah/yq
+
+      - id: spack-ollama
+        name: "ollama"
+        description: "Ollama, runs large language models locally"
+        spack_url: "https://packages.spack.io/package.html?name=ollama"
+        upstream: ollama/ollama
+
+      - id: spack-wasi-sdk-prebuilt
+        name: "wasi-sdk-prebuilt"
+        description: "WASI SDK sysroot for compiling C and C++ to WebAssembly"
+        spack_url: "https://packages.spack.io/package.html?name=wasi-sdk-prebuilt"
+        upstream: WebAssembly/wasi-sdk
+
+      - id: spack-xfce4
+        name: "xfce4"
+        description: "The Xfce 4 desktop environment: core libraries, panel, session, settings, window manager and file manager"
+        spack_url: "https://packages.spack.io/package.html?name=xfce4-core"
+        features:
+          - "exo"
+          - "garcon"
+          - "libxfce4ui"
+          - "libxfce4util"
+          - "thunar"
+          - "thunar-volman"
+          - "tumbler"
+          - "xfce4-appfinder"
+          - "xfce4-core"
+          - "xfce4-panel"
+          - "xfce4-session"
+          - "xfce4-settings"
+          - "xfconf"
+          - "xfdesktop"
+          - "xfwm4"
+
+      - id: spack-libgtop
+        name: "libgtop"
+        description: "GNOME top libraries for collecting system monitoring data"
+        spack_url: "https://packages.spack.io/package.html?name=libgtop"
+
+      - id: spack-libgudev
+        name: "libgudev"
+        description: "GObject bindings for libudev"
+        spack_url: "https://packages.spack.io/package.html?name=libgudev"
+
+      - id: spack-libdisplay-info
+        name: "libdisplay-info"
+        description: "EDID and DisplayID parsing library"
+        spack_url: "https://packages.spack.io/package.html?name=libdisplay-info"
+
+      - id: spack-xorgproto
+        name: "xorgproto"
+        description: "X Window System unified protocol definitions"
+        spack_url: "https://packages.spack.io/package.html?name=xorgproto"
 
   tools:
     title: "Developer Tools"

@@ -480,6 +480,14 @@ categories:
         role: contributor
         note: "Original author: bodowd"
 
+  # Spack packages I maintain. The section is hidden while `projects` is empty.
+  # Each entry uses the project-row fields: name, description, spack_url (the package's page on
+  # packages.spack.io), upstream (the upstream project's GitHub owner/repo), and optional features and note.
+  spack_packages:
+    title: "Spack Packages"
+    description: "Spack packages I maintain"
+    projects: []
+
   tools:
     title: "Developer Tools"
     description: "Command-line tools and utilities"

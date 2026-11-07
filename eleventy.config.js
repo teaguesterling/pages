@@ -56,7 +56,9 @@ export default function (eleventyConfig) {
 
   // Recent updates: the DuckDB extensions' GitHub releases (fetched into stats.json by update-stats.sh) merged with
   // the hand-written notes in src/updates/, newest first. The index section and feed.xml both read this list.
-  eleventyConfig.addFilter("recentUpdates", function (notes, limit) {
+  // `grouped` (the index) shows each extension once, at its newest release, and lists its other releases from the
+  // 14 days before that in `earlier`. The feed keeps one entry per release, so an entry never changes once read.
+  eleventyConfig.addFilter("recentUpdates", function (notes, limit, grouped) {
     const extensions = new Map();
     const subcategories = this.ctx?.projects?.categories?.duckdb_extensions?.subcategories || {};
     for (const sub of Object.values(subcategories)) {
@@ -68,9 +70,25 @@ export default function (eleventyConfig) {
         kind: "release",
         project: extensions.get(r.repo),
         title: `${extensions.get(r.repo)} ${r.tag}`,
+        tag: r.tag,
         date: new Date(r.published),
         url: r.url,
-      }));
+        earlier: [],
+      }))
+      .sort((a, b) => b.date - a.date);
+    if (grouped) {
+      const GROUP_DAYS = 14;
+      const newest = new Map();
+      for (const r of releases) {
+        const head = newest.get(r.project);
+        if (!head) {
+          newest.set(r.project, r);
+        } else if (head.date - r.date <= GROUP_DAYS * 86400000) {
+          head.earlier.push({ tag: r.tag, url: r.url });
+        }
+      }
+      releases.splice(0, releases.length, ...newest.values());
+    }
     const written = (notes || []).map((n) => ({
       kind: "note",
       project: n.data.project || "",

@@ -5,7 +5,7 @@ layout: base.njk
 {% set badges = projects.badges %}
 
 {# Recent updates -- extension releases from stats.json and notes from src/updates/, also served as feed.xml #}
-{% set updates = collections.updates | recentUpdates(8) %}
+{% set updates = collections.updates | recentUpdates(8, true) %}
 {% if updates.length %}
 <section class="category recent-updates" id="recent-updates">
   <header class="category-header">
@@ -19,6 +19,7 @@ layout: base.njk
       <span class="update-kind">{{ "note" if u.kind == "note" else "release" }}</span>
       <a href="{{ (u.url | url) if u.kind == 'note' else u.url }}">{{ u.title }}</a>
       {% if u.summary %}<span class="update-summary">{{ u.summary }}</span>{% endif %}
+      {% if u.earlier and u.earlier.length %}<span class="update-summary">Also {% for e in u.earlier %}<a href="{{ e.url }}">{{ e.tag }}</a>{{ ", " if not loop.last }}{% endfor %}</span>{% endif %}
     </li>
     {% endfor %}
   </ul>
@@ -100,6 +101,28 @@ layout: base.njk
     {% endfor %}
   </div>
 </section>
+
+{# Spack packages I maintain -- hidden until projects.yaml lists some #}
+{% set category = projects.categories.spack_packages %}
+{% if category and category.projects and category.projects.length %}
+<section class="category" id="spack-packages">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+
+  <div class="projects-table">
+    <div class="projects-table-header">
+      <div class="col-name">Package</div>
+      <div class="col-description">Description</div>
+      <div class="col-badges">Status</div>
+    </div>
+    {% for project in category.projects %}
+      {% include "project-row.njk" %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 
 {# Developer Tools #}
 {% set category = projects.categories.tools %}

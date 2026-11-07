@@ -1,0 +1,31 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+{%- set updates = collections.updates | recentUpdates(30) -%}
+{%- set home = projects.site.origin + ('/' | url) -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ projects.site.title }}: recent updates</title>
+  <subtitle>Releases of the DuckDB extensions, and notes on what changed</subtitle>
+  <link href="{{ projects.site.origin }}{{ '/feed.xml' | url }}" rel="self"/>
+  <link href="{{ home }}"/>
+  <id>{{ home }}</id>
+  <updated>{% if updates.length %}{{ updates[0].date | isoDate }}{% else %}{{ stats.last_updated or '1970-01-01T00:00:00Z' }}{% endif %}</updated>
+  <author><name>Teague Sterling</name></author>
+  {%- for u in updates %}
+  {%- set link = (projects.site.origin + (u.url | url)) if u.kind == 'note' else u.url %}
+  <entry>
+    <title>{{ u.title | escape }}</title>
+    <link href="{{ link }}"/>
+    <id>{{ link }}</id>
+    <updated>{{ u.date | isoDate }}</updated>
+    {%- if u.kind == 'note' %}
+    <summary>{{ u.summary | escape }}</summary>
+    <content type="html">{{ u.content | escape }}</content>
+    {%- else %}
+    <summary>{{ u.project }} released {{ u.title }}. The release notes are on GitHub.</summary>
+    {%- endif %}
+  </entry>
+  {%- endfor %}
+</feed>

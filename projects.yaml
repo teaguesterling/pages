@@ -5,6 +5,8 @@ site:
   title: "Teague Sterling's Open Source Projects"
   description: "A collection of DuckDB extensions, developer tools, and research projects"
   github_username: teaguesterling
+  # The scheme and host the site is served from. With pathPrefix in eleventy.config.js it makes the feed's absolute URLs.
+  origin: "https://teaguesterling.github.io"
 
 # Badge configuration templates
 badges:

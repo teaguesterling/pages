@@ -40,6 +40,34 @@ done
 stars_json+="}"
 
 echo ""
+echo "Fetching recent releases..."
+# One JSON array of each repo's last 5 published releases, for the Recent updates section and the feed.
+# A repo with no releases returns []. Drafts aren't visible to this token, and prereleases are dropped.
+releases_file=$(mktemp)
+trap 'rm -f "$releases_file"' EXIT
+for repo in $repos; do
+  if [[ -n "$auth_header" ]]; then
+    curl -s -H "$auth_header" "https://api.github.com/repos/$repo/releases?per_page=5" 2>/dev/null
+  else
+    curl -s "https://api.github.com/repos/$repo/releases?per_page=5" 2>/dev/null
+  fi | python3 -c "
+import json, sys
+try:
+    data = json.load(sys.stdin)
+except ValueError:
+    data = []
+if not isinstance(data, list):
+    data = []
+for r in data:
+    if r.get('draft') or r.get('prerelease') or not r.get('published_at'):
+        continue
+    print(json.dumps({'repo': sys.argv[1], 'tag': r['tag_name'], 'name': r.get('name') or r['tag_name'],
+                      'published': r['published_at'], 'url': r['html_url']}))
+" "$repo" >> "$releases_file" || true
+done
+echo "  $(wc -l < "$releases_file") releases"
+
+echo ""
 echo "Fetching DuckDB community extension downloads..."
 downloads_json=$(curl -s "https://community-extensions.duckdb.org/downloads-last-week.json" 2>/dev/null || echo "{}")
 
@@ -50,6 +78,8 @@ import json, sys
 
 stars = json.loads(sys.argv[1])
 downloads = json.loads(sys.argv[2])
+with open(sys.argv[4]) as f:
+    releases = sorted((json.loads(line) for line in f if line.strip()), key=lambda r: r['published'], reverse=True)
 
 # Map repo names to community extension names
 # The community registry uses short names without the duckdb_ prefix in most cases
@@ -84,12 +114,13 @@ stats = {
     'downloads_weekly': repo_downloads,
     'downloads_source': 'community-extensions.duckdb.org',
     'last_updated': downloads.get('_last_update', ''),
+    'releases': releases,
 }
 
 with open(sys.argv[3], 'w') as f:
     json.dump(stats, f, indent=2)
 
 print(f'Wrote stats for {len(stars)} repos ({len(repo_downloads)} with download data)')
-" "$stars_json" "$downloads_json" "$OUTPUT_FILE"
+" "$stars_json" "$downloads_json" "$OUTPUT_FILE" "$releases_file"
 
 echo "Done. Output: $OUTPUT_FILE"

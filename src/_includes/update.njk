@@ -1,0 +1,8 @@
+---
+layout: base.njk
+---
+<article class="update-note">
+  <p class="update-meta"><a href="{{ '/' | url }}#recent-updates">Recent updates</a> · {{ page.date | shortDate }}{% if project %} · {{ project }}{% endif %}</p>
+  <h2>{{ title }}</h2>
+  {{ content | safe }}
+</article>

@@ -4,6 +4,27 @@ layout: base.njk
 
 {% set badges = projects.badges %}
 
+{# Recent updates -- extension releases from stats.json and notes from src/updates/, also served as feed.xml #}
+{% set updates = collections.updates | recentUpdates(8) %}
+{% if updates.length %}
+<section class="category recent-updates" id="recent-updates">
+  <header class="category-header">
+    <h2>Recent updates</h2>
+    <p>The latest releases of the DuckDB extensions, and notes on what changed. <a href="{{ '/feed.xml' | url }}">Subscribe to the feed</a>.</p>
+  </header>
+  <ul class="updates-list">
+    {% for u in updates %}
+    <li class="update update--{{ u.kind }}">
+      <time datetime="{{ u.date | isoDate }}">{{ u.date | shortDate }}</time>
+      <span class="update-kind">{{ "note" if u.kind == "note" else "release" }}</span>
+      <a href="{{ (u.url | url) if u.kind == 'note' else u.url }}">{{ u.title }}</a>
+      {% if u.summary %}<span class="update-summary">{{ u.summary }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
 {# DuckDB Extensions - Authored #}
 {% set category = projects.categories.duckdb_extensions %}
 <section class="category" id="duckdb-extensions">

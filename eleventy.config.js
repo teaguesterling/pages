@@ -33,6 +33,14 @@ export default function (eleventyConfig) {
     return Object.values(subcategories).flatMap((sub) => sub.projects || []);
   });
 
+  // Count the projects in a list of category keys, through subcategories too. The index's area cards use it.
+  eleventyConfig.addFilter("countProjects", function (keys, categories) {
+    return (keys || []).reduce((n, key) => {
+      const c = categories?.[key] || {};
+      return n + (c.projects || Object.values(c.subcategories || {}).flatMap((sub) => sub.projects || [])).length;
+    }, 0);
+  });
+
   // Look up stars for a repo
   eleventyConfig.addFilter("stars", function (repo) {
     const stats = this.ctx?.stats;

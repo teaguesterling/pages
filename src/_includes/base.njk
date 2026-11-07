@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ projects.site.title }}</title>
+  <title>{% if title %}{{ title }} · {% endif %}{{ projects.site.title }}</title>
   <meta name="description" content="{{ projects.site.description }}">
   <link rel="alternate" type="application/atom+xml" title="Recent updates" href="{{ '/feed.xml' | url }}">
   <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
@@ -27,6 +27,10 @@
         <a href="{{ '/static/drift-monitor.html' | url }}" class="github-link">Drift Monitor</a>
         <a href="{{ '/static/tree-contract-lesson.html' | url }}" class="github-link">Tree Contract Lesson</a>
       </div>
+      <nav class="area-nav">
+        {% for area in projects.areas %}<a href="{{ ('/' + area.key + '/') | url }}"{% if page.url == '/' + area.key + '/' %} aria-current="page"{% endif %}>{{ area.title }}</a>{% endfor %}
+        <a href="{{ '/updates/' | url }}"{% if page.url == '/updates/' %} aria-current="page"{% endif %}>Updates</a>
+      </nav>
     </div>
   </header>
 

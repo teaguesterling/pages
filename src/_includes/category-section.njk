@@ -1,0 +1,27 @@
+{# One category from projects.yaml. Set catKey before the include. A category with no projects is left out. #}
+{% set category = projects.categories[catKey] %}
+{% set mods = { duckdb_contributions: "contributions", academic: "academic", experimental: "experimental" } %}
+{% if category and ((category.projects and category.projects.length) or category.subcategories) %}
+<section class="category{% if mods[catKey] %} category--{{ mods[catKey] }}{% endif %}" id="{{ catKey | replace('_', '-') }}">
+  <header class="category-header">
+    <h2>{{ category.title }}</h2>
+    <p>{{ category.description }}</p>
+    {% if category.duckdb2_note %}
+    <p class="category-duckdb2-note">{{ category.duckdb2_note }}</p>
+    {% endif %}
+  </header>
+
+  {% if category.subcategories %}
+  {% for subKey, subcategory in category.subcategories %}
+  <div class="subcategory" id="{{ subKey }}">
+    <h3 class="subcategory-title">{{ subcategory.title }}</h3>
+    {% set rows = subcategory.projects %}
+    {% include "projects-table.njk" %}
+  </div>
+  {% endfor %}
+  {% else %}
+  {% set rows = category.projects %}
+  {% include "projects-table.njk" %}
+  {% endif %}
+</section>
+{% endif %}

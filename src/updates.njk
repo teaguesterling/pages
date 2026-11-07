@@ -1,0 +1,15 @@
+---
+layout: base.njk
+permalink: /updates/
+title: Updates
+---
+
+{% set updates = collections.updates | recentUpdates(50, false) %}
+<p class="breadcrumb"><a href="{{ '/' | url }}">All projects</a> / Updates</p>
+<section class="category recent-updates" id="recent-updates">
+  <header class="category-header">
+    <h2>Updates</h2>
+    <p>Each release of the DuckDB extensions, and notes on what changed. <a href="{{ '/feed.xml' | url }}">Subscribe to the feed</a>.</p>
+  </header>
+  {% include "updates-list.njk" %}
+</section>

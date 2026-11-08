@@ -1,6 +1,14 @@
 import yaml from "js-yaml";
 
+// The site's host. The defaults are teaguesterling.com, which IONOS Deploy Now serves. The GitHub Pages
+// workflow sets both variables, so the github.io copy still works under /pages/ until the DNS moves.
+const PATH_PREFIX = process.env.PATH_PREFIX || "/";
+const SITE_ORIGIN = process.env.SITE_ORIGIN || "https://teaguesterling.com";
+
 export default function (eleventyConfig) {
+  // The scheme and host, without the path prefix. With the `url` filter it makes the feed's absolute URLs.
+  eleventyConfig.addGlobalData("siteOrigin", SITE_ORIGIN);
+
   // Add YAML support for data files
   eleventyConfig.addDataExtension("yaml,yml", (contents) =>
     yaml.load(contents)
@@ -118,7 +126,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("shortDate", (date) => new Date(date).toISOString().slice(0, 10));
 
   return {
-    pathPrefix: "/pages/",
+    pathPrefix: PATH_PREFIX,
     dir: {
       input: "src",
       output: "_site",

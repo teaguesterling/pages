@@ -18,4 +18,4 @@ The index's "Recent updates" section (the newest 5), the `/updates/` page (the n
   ```
 
   The date comes from the file name. Keep links through the `url` filter, not a hard-coded `/pages/`, so the
-  site can move to a custom domain by changing `pathPrefix` and `site.origin` in `projects.yaml`.
+  same note works under both hosts. `PATH_PREFIX` and `SITE_ORIGIN` (see `eleventy.config.js`) set the host.

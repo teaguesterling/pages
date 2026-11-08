@@ -1,7 +1,7 @@
 import yaml from "js-yaml";
 
-// The site's host. The defaults are teaguesterling.com, which IONOS Deploy Now serves. The GitHub Pages
-// workflow sets both variables, so the github.io copy still works under /pages/ until the DNS moves.
+// The site's host. The defaults are teaguesterling.com, the custom domain GitHub Pages serves this repo on.
+// Set both variables to build for another host, such as PATH_PREFIX=/pages/ for teaguesterling.github.io/pages/.
 const PATH_PREFIX = process.env.PATH_PREFIX || "/";
 const SITE_ORIGIN = process.env.SITE_ORIGIN || "https://teaguesterling.com";
 

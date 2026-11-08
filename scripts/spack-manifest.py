@@ -300,10 +300,13 @@ def main():
                 todo.append(n)
             seen |= added
         trees = {}
+        # A shallow clone (as in CI) fetches only the head commit; a full clone is not made shallow.
+        shallow = run(["git", "-C", packages_root, "rev-parse", "--is-shallow-repository"]).strip() == "true"
+        depth = ["--depth", "1"] if shallow else []
         try:
             for n in todo:  # git commands one at a time: they share the checkout's locks
                 trees[n] = Path(workdir) / f"pr-{n}"
-                run(["git", "-C", packages_root, "fetch", "-q", "--depth", "1", PACKAGES_URL, f"pull/{n}/head"])
+                run(["git", "-C", packages_root, "fetch", "-q", *depth, PACKAGES_URL, f"pull/{n}/head"])
                 run(["git", "-C", packages_root, "worktree", "add", "-q", "--detach", trees[n], "FETCH_HEAD"])
             # Spack loads every recipe of a new checkout and builds its indexes, which takes most of a minute.
             # Run a few at once: the work is mostly disk, so more at once was slower on a busy machine.
@@ -316,7 +319,6 @@ def main():
         finally:
             for tree in trees.values():
                 subprocess.run(["git", "-C", packages_root, "worktree", "remove", "--force", tree], capture_output=True)
-            subprocess.run(["git", "-C", packages_root, "worktree", "prune"], capture_output=True)
 
     rows = build_rows(packages, config)
     manifest = {

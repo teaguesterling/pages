@@ -34,10 +34,12 @@ export default function (eleventyConfig) {
   });
 
   // Count the projects in a list of category keys, through subcategories too. The index's area cards use it.
+  // The spack_packages rows come from src/_data/spack.json (scripts/spack-manifest.py), as in category-section.njk.
   eleventyConfig.addFilter("countProjects", function (keys, categories) {
     return (keys || []).reduce((n, key) => {
       const c = categories?.[key] || {};
-      return n + (c.projects || Object.values(c.subcategories || {}).flatMap((sub) => sub.projects || [])).length;
+      const rows = key === "spack_packages" ? this.ctx?.spack?.rows : c.projects;
+      return n + (rows || Object.values(c.subcategories || {}).flatMap((sub) => sub.projects || [])).length;
     }, 0);
   });
 

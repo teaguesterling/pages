@@ -44,7 +44,9 @@ echo "Fetching recent releases..."
 # One JSON array of each repo's last 5 published releases, for the Recent updates section and the feed.
 # A repo with no releases returns []. Drafts aren't visible to this token, and prereleases are dropped.
 releases_file=$(mktemp)
-trap 'rm -f "$releases_file"' EXIT
+# The Spack clones go here, when SPACK_ROOT and SPACK_PACKAGES are unset (see the end of this script).
+spack_tmp=$(mktemp -d)
+trap 'rm -rf "$releases_file" "$spack_tmp"' EXIT
 for repo in $repos; do
   if [[ -n "$auth_header" ]]; then
     curl -s -H "$auth_header" "https://api.github.com/repos/$repo/releases?per_page=5" 2>/dev/null
@@ -122,5 +124,27 @@ with open(sys.argv[3], 'w') as f:
 
 print(f'Wrote stats for {len(stars)} repos ({len(repo_downloads)} with download data)')
 " "$stars_json" "$downloads_json" "$OUTPUT_FILE" "$releases_file"
+
+echo ""
+echo "Building the Spack package manifest..."
+# scripts/spack-manifest.py lists the Spack packages I maintain into src/_data/spack.json. It needs a spack/spack
+# and a spack/spack-packages checkout: SPACK_ROOT and SPACK_PACKAGES, or shallow clones made here.
+# A failure keeps the committed spack.json, so Spack or the GitHub API being down does not stop a deploy.
+# (errexit does not apply inside a function called as an `if` condition, so each step checks its own status.)
+spack_manifest() {
+  local spack_root="${SPACK_ROOT:-}" spack_packages="${SPACK_PACKAGES:-}"
+  if [[ -z "$spack_root" ]]; then
+    spack_root="$spack_tmp/spack"
+    git clone -q --depth 1 https://github.com/spack/spack "$spack_root" || return 1
+  fi
+  if [[ -z "$spack_packages" ]]; then
+    spack_packages="$spack_tmp/spack-packages"
+    git clone -q --depth 1 https://github.com/spack/spack-packages "$spack_packages" || return 1
+  fi
+  SPACK_ROOT="$spack_root" SPACK_PACKAGES="$spack_packages" python3 "$SCRIPT_DIR/scripts/spack-manifest.py" || return 1
+}
+if ! spack_manifest; then
+  echo "Warning: the Spack manifest failed; keeping the previous src/_data/spack.json" >&2
+fi
 
 echo "Done. Output: $OUTPUT_FILE"

@@ -1,7 +1,9 @@
-{# One category from projects.yaml. Set catKey before the include. A category with no projects is left out. #}
+{# One category from projects.yaml. Set catKey before the include. A category with no projects is left out.
+   The spack_packages rows are generated into src/_data/spack.json by scripts/spack-manifest.py. #}
 {% set category = projects.categories[catKey] %}
 {% set mods = { duckdb_contributions: "contributions", academic: "academic", experimental: "experimental" } %}
-{% if category and ((category.projects and category.projects.length) or category.subcategories) %}
+{% set categoryRows = spack.rows if catKey == "spack_packages" else category.projects %}
+{% if category and ((categoryRows and categoryRows.length) or category.subcategories) %}
 <section class="category{% if mods[catKey] %} category--{{ mods[catKey] }}{% endif %}" id="{{ catKey | replace('_', '-') }}">
   <header class="category-header">
     <h2>{{ category.title }}</h2>
@@ -20,7 +22,7 @@
   </div>
   {% endfor %}
   {% else %}
-  {% set rows = category.projects %}
+  {% set rows = categoryRows %}
   {% include "projects-table.njk" %}
   {% endif %}
 </section>

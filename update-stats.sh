@@ -143,7 +143,11 @@ spack_manifest() {
   fi
   SPACK_ROOT="$spack_root" SPACK_PACKAGES="$spack_packages" python3 "$SCRIPT_DIR/scripts/spack-manifest.py" || return 1
 }
-if ! spack_manifest; then
+# It takes minutes, so in GitHub Actions it runs only when the workflow sets SPACK_MANIFEST=1 (the daily
+# schedule and manual runs). Push deploys use the spack.json that the last scheduled run left in the cache.
+if [[ -n "${GITHUB_ACTIONS:-}" && "${SPACK_MANIFEST:-0}" != "1" ]]; then
+  echo "Skipped (SPACK_MANIFEST is not 1); using src/_data/spack.json as it is"
+elif ! spack_manifest; then
   echo "Warning: the Spack manifest failed; keeping the previous src/_data/spack.json" >&2
 fi
 

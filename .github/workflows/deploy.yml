@@ -52,10 +52,8 @@ jobs:
           path: src/_data/spack.json
           key: spack-manifest-${{ github.run_id }}
 
+      # teaguesterling.com is this repo's custom domain, so the build uses the root defaults in eleventy.config.js.
       - run: npm run build
-        env:
-          PATH_PREFIX: /pages/
-          SITE_ORIGIN: https://teaguesterling.github.io
 
       - uses: actions/upload-pages-artifact@v3
         with:

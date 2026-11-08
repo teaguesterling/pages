@@ -30,10 +30,27 @@ jobs:
 
       - run: npm ci
 
+      # The Spack manifest takes minutes, so only scheduled and manual runs rebuild it (SPACK_MANIFEST=1).
+      # Every run first restores the newest manifest from the cache, so a push deploy shows the same list.
+      - name: Restore the Spack manifest
+        uses: actions/cache/restore@v4
+        with:
+          path: src/_data/spack.json
+          key: spack-manifest-${{ github.run_id }}
+          restore-keys: spack-manifest-
+
       - name: Fetch latest stats
         run: bash update-stats.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SPACK_MANIFEST: ${{ github.event_name == 'push' && '0' || '1' }}
+
+      - name: Save the Spack manifest
+        if: github.event_name != 'push'
+        uses: actions/cache/save@v4
+        with:
+          path: src/_data/spack.json
+          key: spack-manifest-${{ github.run_id }}
 
       - run: npm run build
 

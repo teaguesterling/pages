@@ -5,8 +5,6 @@ site:
   title: "Teague Sterling's Open Source Projects"
   description: "A collection of DuckDB extensions, developer tools, and research projects"
   github_username: teaguesterling
-  # The scheme and host the site is served from. With pathPrefix in eleventy.config.js it makes the feed's absolute URLs.
-  origin: "https://teaguesterling.github.io"
 
 # The site's pages. The index shows one card per area, and area.njk makes one page per area at /<key>/.
 # `categories` are keys under `categories:`, in page order. `composition: true` adds the composition section.
@@ -323,7 +321,7 @@ categories:
               - "Interactive lesson: from grep to CREATE TREE"
             badges: [issues]
             status: experimental
-            docs_url: "https://teaguesterling.github.io/pages/static/tree-contract-lesson.html"
+            docs_url: "/static/tree-contract-lesson.html"
 
           - id: sitting_duck
             name: "sitting_duck"

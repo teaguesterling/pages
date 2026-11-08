@@ -36,6 +36,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: npm run build
+        env:
+          PATH_PREFIX: /pages/
+          SITE_ORIGIN: https://teaguesterling.github.io
 
       - uses: actions/upload-pages-artifact@v3
         with:
